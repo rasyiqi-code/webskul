@@ -168,7 +168,7 @@
 					<div class="quote-inner">
 						<div class="quote-icon"><i class="fa fa-quote-right"></i></div>
 						<div class="quote-text">
-							<ul id="quote-list">
+							<ul id="quote">
 								<?php foreach($query->getResult() as $row) { ?>
 									<li>"<?=$row->quote?>" — <strong><?=$row->quote_by?></strong></li>
 								<?php } ?>
