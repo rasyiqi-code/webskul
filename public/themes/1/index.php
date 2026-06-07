@@ -144,71 +144,60 @@
 	<?php } ?>
 
 	<!-- Footer -->
-	<footer class="site-footer">
-		<div class="footer-widgets">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-						<div class="footer-brand">
-							<img src="<?=base_url('media_library/images/' . __session('school_profile')['logo'])?>" width="50" height="50" class="mb-3" style="object-fit:contain">
-							<h5><?=__session('school_profile')['school_name']?></h5>
-							<p class="text-muted"><?=__session('school_profile')['tagline']?></p>
-							<p class="mb-0"><i class="fa fa-map-marker mr-2"></i> <?=__session('school_profile')['street_address']?><br>
-							<?=__session('school_profile')['village']?>, <?=__session('school_profile')['sub_district']?>, <?=__session('school_profile')['district']?></p>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-						<h6 class="footer-title">KONTAK</h6>
-						<ul class="footer-contact list-unstyled">
-							<li><i class="fa fa-phone"></i> <?=__session('school_profile')['phone']?></li>
-							<li><i class="fa fa-fax"></i> <?=__session('school_profile')['fax']?></li>
-							<li><i class="fa fa-envelope"></i> <?=__session('school_profile')['email']?></li>
-						</ul>
-						<h6 class="footer-title mt-4">IKUTI KAMI</h6>
-						<div class="social-links">
-							<?php if (NULL !== __session('social_account')['facebook'] && __session('social_account')['facebook']) { ?>
-								<a href="<?=__session('social_account')['facebook']?>" title="Facebook" class="social-icon facebook"><i class="fa fa-facebook"></i></a>
-							<?php } ?>
-							<?php if (NULL !== __session('social_account')['twitter'] && __session('social_account')['twitter']) { ?>
-								<a href="<?=__session('social_account')['twitter']?>" title="Twitter" class="social-icon twitter"><i class="fa fa-twitter"></i></a>
-							<?php } ?>
-							<?php if (NULL !== __session('social_account')['instagram'] && __session('social_account')['instagram']) { ?>
-								<a href="<?=__session('social_account')['instagram']?>" title="Instagram" class="social-icon instagram"><i class="fa fa-instagram"></i></a>
-							<?php } ?>
-							<?php if (NULL !== __session('social_account')['youtube'] && __session('social_account')['youtube']) { ?>
-								<a href="<?=__session('social_account')['youtube']?>" title="Youtube" class="social-icon youtube"><i class="fa fa-youtube"></i></a>
-							<?php } ?>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-6">
-						<h6 class="footer-title">TAGS</h6>
-						<div class="tag-cloud">
-							<?php $query = get_tags(15); if ($query->getNumRows() > 0) { ?>
-								<?php foreach ($query->getResult() as $row) { ?>
-									<a href="<?=site_url('tag/'.$row->slug)?>" class="tag-link"><?=$row->tag?></a>
-								<?php } ?>
-							<?php } ?>
-						</div>
-						<?php if (__session('admission')['admission_status'] == 'open') { ?>
-							<div class="footer-cta mt-4">
-								<a class="btn btn-ppdb" href="<?=site_url('formulir-penerimaan-peserta-didik-baru')?>">
-									<i class="fa fa-user-plus mr-2"></i> PPDB <?=__session('admission_year')?> — DAFTAR SEKARANG
-								</a>
-							</div>
-						<?php } ?>
-					</div>
-				</div>
+	<footer class="site-footer-modern">
+		<div class="container py-5 text-center">
+			<!-- Logo & Identitas Sekolah -->
+			<div class="footer-brand-centered mb-4">
+				<img src="<?=base_url('media_library/images/' . __session('school_profile')['logo'])?>" width="54" height="54" class="mb-3 footer-logo-img" alt="Logo School">
+				<h4 class="footer-school-name font-weight-bold text-white mb-1"><?=__session('school_profile')['school_name']?></h4>
+				<p class="footer-school-tagline text-muted small mb-0"><?=__session('school_profile')['tagline']?></p>
 			</div>
-		</div>
-		<div class="footer-bottom">
-			<div class="container">
-				<div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
-					<div class="copyright">
-						<?=copyright(2017, base_url(), __session('school_profile')['school_name'])?>
-					</div>
-					<div class="powered-by">
-						Powered by <a href="http://webskul.web.id">webskul.web.id</a>
-					</div>
+
+			<!-- Navigasi Horizontal -->
+			<nav class="footer-nav-wrapper mb-4">
+				<ul class="footer-nav-horizontal list-unstyled d-flex flex-wrap justify-content-center mb-0">
+					<li><a href="<?=base_url()?>">BERANDA</a></li>
+					<li><a href="<?=site_url(opening_speech_route());?>">SAMBUTAN</a></li>
+					<li><a href="<?=site_url('kategori/berita')?>">BERITA</a></li>
+					<li><a href="<?=site_url('galeri-foto')?>">GALERI FOTO</a></li>
+					<li><a href="<?=site_url('galeri-video')?>">GALERI VIDEO</a></li>
+					<li><a href="<?=site_url('hubungi-kami')?>">HUBUNGI KAMI</a></li>
+					<?php if (__session('admission')['admission_status'] == 'open') { ?>
+						<li><a href="<?=site_url('formulir-penerimaan-peserta-didik-baru')?>" class="nav-ppdb-link">PPDB ONLINE</a></li>
+					<?php } ?>
+				</ul>
+			</nav>
+
+			<!-- Alamat Ringkas -->
+			<p class="footer-address-text text-muted mb-4">
+				<i class="fa fa-map-marker text-accent mr-2"></i> <?=__session('school_profile')['street_address']?>, <?=__session('school_profile')['village']?>, <?=__session('school_profile')['sub_district']?>, <?=__session('school_profile')['district']?>
+			</p>
+
+			<!-- Sosial Media Monokrom Minimalis -->
+			<div class="footer-social-mono d-flex justify-content-center mb-4">
+				<?php if (NULL !== __session('social_account')['facebook'] && __session('social_account')['facebook']) { ?>
+					<a href="<?=__session('social_account')['facebook']?>" title="Facebook" class="social-icon-mono"><i class="fa fa-facebook"></i></a>
+				<?php } ?>
+				<?php if (NULL !== __session('social_account')['twitter'] && __session('social_account')['twitter']) { ?>
+					<a href="<?=__session('social_account')['twitter']?>" title="Twitter" class="social-icon-mono"><i class="fa fa-twitter"></i></a>
+				<?php } ?>
+				<?php if (NULL !== __session('social_account')['instagram'] && __session('social_account')['instagram']) { ?>
+					<a href="<?=__session('social_account')['instagram']?>" title="Instagram" class="social-icon-mono"><i class="fa fa-instagram"></i></a>
+				<?php } ?>
+				<?php if (NULL !== __session('social_account')['youtube'] && __session('social_account')['youtube']) { ?>
+					<a href="<?=__session('social_account')['youtube']?>" title="Youtube" class="social-icon-mono"><i class="fa fa-youtube-play"></i></a>
+				<?php } ?>
+			</div>
+
+			<!-- Garis Pemisah & Copyright -->
+			<div class="footer-divider-modern mb-4"></div>
+			
+			<div class="footer-bottom-modern d-flex flex-column flex-md-row justify-content-between align-items-center text-muted small">
+				<div class="copyright-text mb-2 mb-md-0">
+					<?=copyright(2017, base_url(), __session('school_profile')['school_name'])?>
+				</div>
+				<div class="powered-by-text">
+					Powered by <a href="http://webskul.web.id" target="_blank" class="text-muted">webskul.web.id</a>
 				</div>
 			</div>
 		</div>
