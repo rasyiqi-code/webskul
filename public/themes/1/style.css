@@ -91,13 +91,14 @@ a:hover { color: var(--primary-dark); text-decoration: none; }
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  margin-left: auto; /* Dorong menu ke sisi kanan */
 }
 #main-menu.sm-clean > li > a {
   color: var(--gray-700) !important;
   font-weight: 600;
-  font-size: 13px;
-  letter-spacing: 0.5px;
-  padding: 24px 14px;
+  font-size: 12px; /* Turunkan sedikit ukuran font untuk hemat ruang */
+  letter-spacing: 0.3px; /* Kurangi jarak antar huruf */
+  padding: 24px 10px; /* Kurangi padding horizontal dari 14px ke 10px */
   text-transform: uppercase;
   transition: color 0.2s;
   position: relative;
@@ -117,11 +118,23 @@ a:hover { color: var(--primary-dark); text-decoration: none; }
   content: '';
   position: absolute;
   bottom: 0;
-  left: 14px;
-  right: 14px;
+  left: 10px; /* Sesuaikan dengan padding horizontal baru */
+  right: 10px; /* Sesuaikan dengan padding horizontal baru */
   height: 3px;
   background: linear-gradient(90deg, var(--primary), var(--accent));
   border-radius: 2px 2px 0 0;
+}
+
+/* Penyesuaian responsif untuk resolusi menengah agar menu tidak patah */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  #main-menu.sm-clean > li > a {
+    font-size: 11px;
+    padding: 24px 6px;
+  }
+  #main-menu.sm-clean > li > a:hover::before {
+    left: 6px;
+    right: 6px;
+  }
 }
 #main-menu.sm-clean ul {
   background: var(--white);
