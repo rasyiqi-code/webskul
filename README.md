@@ -233,5 +233,5 @@ Project ini adalah fork privat. Untuk kontribusi internal:
 
 MIT License — lihat file [LICENSE](LICENSE) untuk detail.
 
-Copyright (c) 2026 Webskul Contributors
-Originally Copyright (c) 2010-2022 Anton Sofyan
+Copyright (c) 2026-present Rasyiqi dan Webskul Contributors
+Originally Copyright (c) 2010-2022 Anton Sofyan (CMS Sekolahku Premium)
