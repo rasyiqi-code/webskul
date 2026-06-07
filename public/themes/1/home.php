@@ -263,15 +263,6 @@ $has_videos = ($videos->getNumRows() > 0);
 ?>
 <section class="py-5 bg-white">
     <div class="container">
-<!-- 7. GALERI FOTO & VIDEO TERBARU -->
-<?php 
-$albums = get_albums(2); 
-$videos = get_videos(2); 
-$has_albums = ($albums->getNumRows() > 0);
-$has_videos = ($videos->getNumRows() > 0);
-?>
-<section class="py-5 bg-white">
-    <div class="container">
         
         <!-- BAGIAN 1: ALBUM FOTO KEGIATAN -->
         <div class="row justify-content-center mb-5">
