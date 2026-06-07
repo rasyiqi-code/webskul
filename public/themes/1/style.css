@@ -96,9 +96,9 @@ a:hover { color: var(--primary-dark); text-decoration: none; }
 #main-menu.sm-clean > li > a {
   color: var(--gray-700) !important;
   font-weight: 600;
-  font-size: 12px; /* Turunkan sedikit ukuran font untuk hemat ruang */
-  letter-spacing: 0.3px; /* Kurangi jarak antar huruf */
-  padding: 24px 10px; /* Kurangi padding horizontal dari 14px ke 10px */
+  font-size: 11px; /* Rapatkan ukuran font agar hemat ruang */
+  letter-spacing: 0.3px;
+  padding: 24px 6px; /* Kurangi padding horizontal menjadi 6px agar lebih rapat */
   text-transform: uppercase;
   transition: color 0.2s;
   position: relative;
@@ -118,8 +118,8 @@ a:hover { color: var(--primary-dark); text-decoration: none; }
   content: '';
   position: absolute;
   bottom: 0;
-  left: 10px; /* Sesuaikan dengan padding horizontal baru */
-  right: 10px; /* Sesuaikan dengan padding horizontal baru */
+  left: 6px; /* Sesuaikan dengan padding horizontal baru */
+  right: 6px; /* Sesuaikan dengan padding horizontal baru */
   height: 3px;
   background: linear-gradient(90deg, var(--primary), var(--accent));
   border-radius: 2px 2px 0 0;
@@ -128,12 +128,12 @@ a:hover { color: var(--primary-dark); text-decoration: none; }
 /* Penyesuaian responsif untuk resolusi menengah agar menu tidak patah */
 @media (min-width: 992px) and (max-width: 1199.98px) {
   #main-menu.sm-clean > li > a {
-    font-size: 11px;
-    padding: 24px 6px;
+    font-size: 10.5px;
+    padding: 24px 4px;
   }
   #main-menu.sm-clean > li > a:hover::before {
-    left: 6px;
-    right: 6px;
+    left: 4px;
+    right: 4px;
   }
 }
 #main-menu.sm-clean ul {
