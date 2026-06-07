@@ -38,8 +38,6 @@ $routes->get('hasil-seleksi-penerimaan-peserta-didik-baru', 'Public\Admission_se
 $routes->get('cetak-formulir-penerimaan-peserta-didik-baru', 'Public\Print_admission_form::index');
 $routes->get('pdf-formulir-penerimaan-peserta-didik-baru/[0-9]/([0-9]{4})-([0-9]{2})-([0-9]{2})/([0-9]{9})', 'Public\Admission_form::print_admission_form/$1/$2/$3/$4');
 $routes->get('cetak-kartu-peserta-ujian-seleksi-penerimaan-peserta-didik-baru', 'Public\Print_admission_exam_card::index');
-$routes->get('views/themes/(:any)/(:any)', 'Public\Assets::theme/$1/$2');
-
 // Auth Routes
 $routes->get('login', 'Login::index');
 $routes->post('login', 'Login::verify');
@@ -50,14 +48,14 @@ $routes->get('reset-password/(:any)', 'Reset_password::index/$1');
 $routes->post('reset-password-process/(:any)', 'Reset_password::process/$1');
 
 // Admin Routes
-$routes->group('dashboard', ['filter' => 'auth|privilege'], static function ($routes) {
+$routes->group('dashboard', ['filter' => ['auth', 'privilege']], static function ($routes) {
     $routes->get('/', 'Dashboard::index');
     $routes->post('sidebar-collapse', 'Dashboard::sidebar_collapse');
     $routes->get('print-sessions', 'Dashboard::print_sessions');
 });
 
 // Academic Routes
-$routes->group('akademik', ['filter' => 'auth|privilege'], static function ($routes) {
+$routes->group('akademik', ['filter' => ['auth', 'privilege']], static function ($routes) {
     $routes->get('tahun-akademik', 'Academic\Academic_years::index');
     $routes->get('jurusan', 'Academic\Majors::index');
     $routes->get('kelas', 'Academic\Class_groups::index');
@@ -78,7 +76,7 @@ $routes->group('akademik', ['filter' => 'auth|privilege'], static function ($rou
 });
 
 // PPDB / Admission Routes
-$routes->group('ppdb', ['filter' => 'auth|privilege'], static function ($routes) {
+$routes->group('ppdb', ['filter' => ['auth', 'privilege']], static function ($routes) {
     $routes->get('pengaturan', 'Admission\Settings::index');
     $routes->get('gelombang', 'Admission\Phases::index');
     $routes->get('jenis-pendaftaran', 'Admission\Types::index');
@@ -88,7 +86,7 @@ $routes->group('ppdb', ['filter' => 'auth|privilege'], static function ($routes)
 });
 
 // Blog Routes
-$routes->group('blog', ['filter' => 'auth|privilege'], static function ($routes) {
+$routes->group('blog', ['filter' => ['auth', 'privilege']], static function ($routes) {
     $routes->get('tulisan', 'Blog\Posts::index');
     $routes->get('halaman', 'Blog\Pages::index');
     $routes->get('kategori', 'Blog\Post_categories::index');
@@ -103,7 +101,7 @@ $routes->group('blog', ['filter' => 'auth|privilege'], static function ($routes)
 });
 
 // Setting Routes
-$routes->group('pengaturan', ['filter' => 'auth|privilege'], static function ($routes) {
+$routes->group('pengaturan', ['filter' => ['auth', 'privilege']], static function ($routes) {
     $routes->get('umum', 'Settings\General::index');
     $routes->get('profil-sekolah', 'Settings\School_profile::index');
     $routes->get('menulis', 'Settings\Writing::index');
@@ -115,14 +113,14 @@ $routes->group('pengaturan', ['filter' => 'auth|privilege'], static function ($r
 });
 
 // Employee Routes
-$routes->group('pegawai', ['filter' => 'auth|privilege'], static function ($routes) {
+$routes->group('pegawai', ['filter' => ['auth', 'privilege']], static function ($routes) {
     $routes->get('/', 'Employees\Employees::index');
     $routes->get('jenis-gtk', 'Employees\Employment_types::index');
     $routes->get('impor', 'Employees\Import::index');
 });
 
 // User Management Routes
-$routes->group('pengguna', ['filter' => 'auth|privilege'], static function ($routes) {
+$routes->group('pengguna', ['filter' => ['auth', 'privilege']], static function ($routes) {
     $routes->get('administrator', 'Users\Administrator::index');
     $routes->get('siswa', 'Users\Students::index');
     $routes->get('pegawai', 'Users\Employees::index');
@@ -132,7 +130,7 @@ $routes->group('pengguna', ['filter' => 'auth|privilege'], static function ($rou
 });
 
 // Media Routes
-$routes->group('media', ['filter' => 'auth|privilege'], static function ($routes) {
+$routes->group('media', ['filter' => ['auth', 'privilege']], static function ($routes) {
     $routes->get('berkas', 'Media\Files::index');
     $routes->get('album', 'Media\Albums::index');
     $routes->get('foto', 'Media\Photos::index');
@@ -140,32 +138,32 @@ $routes->group('media', ['filter' => 'auth|privilege'], static function ($routes
 });
 
 // Appearance Routes
-$routes->group('tampilan', ['filter' => 'auth|privilege'], static function ($routes) {
+$routes->group('tampilan', ['filter' => ['auth', 'privilege']], static function ($routes) {
     $routes->get('tema', 'Appearance\Themes::index');
     $routes->get('menu', 'Appearance\Menus::index');
 });
 
 // Maintenance Routes
-$routes->group('pemeliharaan', ['filter' => 'auth|privilege'], static function ($routes) {
+$routes->group('pemeliharaan', ['filter' => ['auth', 'privilege']], static function ($routes) {
     $routes->get('cadangkan-aplikasi', 'Maintenance\Backup_apps::index');
     $routes->get('cadangkan-database', 'Maintenance\Backup_database::index');
 });
 
 // Plugin Routes
-$routes->group('plugin', ['filter' => 'auth|privilege'], static function ($routes) {
+$routes->group('plugin', ['filter' => ['auth', 'privilege']], static function ($routes) {
     $routes->get('banner', 'Plugins\Banners::index');
     $routes->get('pertanyaan', 'Plugins\Questions::index');
     $routes->get('jawaban', 'Plugins\Answers::index');
 });
 
 // Reference Routes
-$routes->group('referensi', ['filter' => 'auth|privilege'], static function ($routes) {
+$routes->group('referensi', ['filter' => ['auth', 'privilege']], static function ($routes) {
     $routes->get('gedung', 'Reference\Buildings::index');
     $routes->get('ruangan', 'Reference\Rooms::index');
 });
 
 // Teacher Routes (akses khusus guru — difilter privilege & cek employment_type di controller)
-$routes->group('guru', ['filter' => 'auth|privilege'], static function ($routes) {
+$routes->group('guru', ['filter' => ['auth', 'privilege']], static function ($routes) {
     $routes->get('jadwal-mengajar', 'Teacher\Academic_schedules::index');
     $routes->post('jadwal-mengajar/pagination', 'Teacher\Academic_schedules::pagination');
 

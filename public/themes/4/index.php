@@ -57,7 +57,7 @@
 	<?=link_tag('assets/plugins/jquery.smartmenus/sm-clean.css')?>
 	<?=link_tag('assets/plugins/magnific-popup/magnific-popup.css')?>
 	<?=link_tag('assets/css/loading.css')?>
-	<?=link_tag('views/themes/3/style.css')?>
+	<?=link_tag('themes/4/style.css')?>
 	<script type="text/javascript">
 	const _BASE_URL = '<?=base_url();?>';
 	const _CURRENT_URL = '<?=current_url();?>';

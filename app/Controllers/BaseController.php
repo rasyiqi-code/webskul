@@ -17,6 +17,9 @@ abstract class BaseController extends Controller
 
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
+        // Muat seluruh helper bawaan dan kustom secara eksplisit
+        helper($this->helpers);
+
         parent::initController($request, $response, $logger);
 
         $this->loadSettings();
