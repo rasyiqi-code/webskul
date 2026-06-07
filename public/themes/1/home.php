@@ -255,17 +255,27 @@
 <?php } ?>
 
 <!-- 7. GALERI FOTO & VIDEO TERBARU -->
+<?php 
+$albums = get_albums(2); 
+$videos = get_videos(2); 
+$has_albums = ($albums->getNumRows() > 0);
+$has_videos = ($videos->getNumRows() > 0);
+
+if ($has_albums || $has_videos) { 
+?>
 <section class="py-5 bg-white">
     <div class="container">
-        <div class="row">
-            <!-- Grid Album Foto -->
-            <div class="col-lg-6 mb-5 mb-lg-0">
-                <div class="mb-4">
-                    <span class="section-tagline">Galeri Dokumentasi</span>
-                    <h3 class="section-title font-weight-bold">Album Foto Kegiatan</h3>
-                    <div class="section-divider"></div>
-                </div>
-                <?php $albums = get_albums(2); if ($albums->getNumRows() > 0) { ?>
+        <div class="row justify-content-center">
+            
+            <?php if ($has_albums && $has_videos) { ?>
+                <!-- KEDUA-DUANYA ADA DATA (TAMPILKAN BERSISIAN) -->
+                <!-- Grid Album Foto -->
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <div class="mb-4">
+                        <span class="section-tagline text-accent">Galeri Dokumentasi</span>
+                        <h3 class="section-title font-weight-bold">Album Foto Kegiatan</h3>
+                        <div class="section-divider"></div>
+                    </div>
                     <div class="row">
                         <?php foreach($albums->getResult() as $row) { ?>
                             <div class="col-md-6 mb-4">
@@ -287,19 +297,15 @@
                             Semua Galeri Foto <i class="fa fa-arrow-circle-right ml-1"></i>
                         </a>
                     </div>
-                <?php } else { ?>
-                    <p class="text-muted">Belum ada dokumentasi album foto.</p>
-                <?php } ?>
-            </div>
-
-            <!-- Grid Video Youtube -->
-            <div class="col-lg-6">
-                <div class="mb-4">
-                    <span class="section-tagline">Dokumentasi Video</span>
-                    <h3 class="section-title font-weight-bold">Video Terbaru</h3>
-                    <div class="section-divider"></div>
                 </div>
-                <?php $videos = get_videos(2); if ($videos->getNumRows() > 0) { ?>
+
+                <!-- Grid Video Youtube -->
+                <div class="col-lg-6">
+                    <div class="mb-4">
+                        <span class="section-tagline text-accent">Dokumentasi Video</span>
+                        <h3 class="section-title font-weight-bold">Video Terbaru</h3>
+                        <div class="section-divider"></div>
+                    </div>
                     <div class="row">
                         <?php foreach($videos->getResult() as $row) { ?>
                             <div class="col-md-6 mb-4">
@@ -316,13 +322,70 @@
                             Semua Galeri Video <i class="fa fa-arrow-circle-right ml-1"></i>
                         </a>
                     </div>
-                <?php } else { ?>
-                    <p class="text-muted">Belum ada dokumentasi video.</p>
-                <?php } ?>
-            </div>
+                </div>
+
+            <?php } else if ($has_albums) { ?>
+                <!-- HANYA ALBUM FOTO YANG ADA (TAMPILKAN SATU KOLOM DI TENGAH) -->
+                <div class="col-lg-8">
+                    <div class="mb-4 text-center">
+                        <span class="section-tagline text-accent">Galeri Dokumentasi</span>
+                        <h3 class="section-title font-weight-bold">Album Foto Kegiatan</h3>
+                        <div class="section-divider mx-auto"></div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <?php foreach($albums->getResult() as $row) { ?>
+                            <div class="col-md-6 mb-4">
+                                <div class="card-gallery position-relative overflow-hidden rounded-custom shadow-sm-custom">
+                                    <img src="<?=base_url('media_library/albums/'.$row->album_cover)?>" class="img-fluid gallery-img w-100" alt="<?=$row->album_title?>">
+                                    <div class="gallery-overlay d-flex flex-column justify-content-end p-3">
+                                        <h6 class="text-white font-weight-bold m-0"><?=$row->album_title?></h6>
+                                        <p class="text-accent small m-0"><?=$row->album_description?></p>
+                                        <button type="button" onclick="photo_preview(<?=$row->id?>)" class="btn-gallery-zoom mt-2">
+                                            <i class="fa fa-search-plus"></i> Lihat Foto
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    </div>
+                    <div class="mt-2 text-center">
+                        <a href="<?=site_url('galeri-foto')?>" class="btn btn-outline-primary-custom px-4">
+                            Lihat Semua Galeri Foto <i class="fa fa-arrow-circle-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+            <?php } else if ($has_videos) { ?>
+                <!-- HANYA VIDEO YANG ADA (TAMPILKAN SATU KOLOM DI TENGAH) -->
+                <div class="col-lg-8">
+                    <div class="mb-4 text-center">
+                        <span class="section-tagline text-accent">Dokumentasi Video</span>
+                        <h3 class="section-title font-weight-bold">Video Terbaru</h3>
+                        <div class="section-divider mx-auto"></div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <?php foreach($videos->getResult() as $row) { ?>
+                            <div class="col-md-6 mb-4">
+                                <div class="video-card rounded-custom overflow-hidden shadow-sm-custom">
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<?=$row->post_content?>" allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    </div>
+                    <div class="mt-2 text-center">
+                        <a href="<?=site_url('galeri-video')?>" class="btn btn-outline-primary-custom px-4">
+                            Lihat Semua Galeri Video <i class="fa fa-arrow-circle-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            <?php } ?>
+
         </div>
     </div>
 </section>
+<?php } ?>
 
 <!-- 8. PANEL INTERAKSI PUBLIK (POLLING & NEWSLETTER) -->
 <?php $question = get_active_question(); ?>
