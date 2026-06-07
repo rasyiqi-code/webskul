@@ -70,12 +70,15 @@ a:hover { color: var(--primary-dark); text-decoration: none; }
   font-size: 16px;
   color: var(--dark);
   letter-spacing: 0.5px;
-  line-height: 1.2;
+  line-height: 1.1; /* Kurangi line-height agar lebih rapat */
+  margin-bottom: 1px; /* Atur margin bawah kecil secara terkontrol */
 }
 .main-header .navbar-brand .brand-tagline {
+  display: block; /* Buat block agar baris baru terpisah dengan bersih */
   color: var(--gray-500);
   font-size: 11px;
   letter-spacing: 0.3px;
+  line-height: 1.1; /* Kurangi line-height agar tidak renggang */
 }
 .navbar-toggler {
   border: none;
