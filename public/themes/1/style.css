@@ -1290,6 +1290,8 @@ h5.card-title a:hover { color: var(--primary); }
   height: 1px;
   background: rgba(255, 255, 255, 0.06);
   width: 100%;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 .footer-bottom-modern {
   color: var(--gray-600) !important;

@@ -145,7 +145,7 @@
 
 	<!-- Footer -->
 	<footer class="site-footer-modern">
-		<div class="container py-5 text-center">
+		<div class="container pt-5 pb-3 text-center">
 			<!-- Logo & Identitas Sekolah -->
 			<div class="footer-brand-centered mb-4">
 				<img src="<?=base_url('media_library/images/' . __session('school_profile')['logo'])?>" width="54" height="54" class="mb-3 footer-logo-img" alt="Logo School">
