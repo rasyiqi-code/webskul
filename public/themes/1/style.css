@@ -863,19 +863,7 @@ h5.card-title a:hover { color: var(--primary); }
 /* Carousel Control Custom */
 .hero-section .carousel-control-prev,
 .hero-section .carousel-control-next {
-  width: 54px;
-  height: 54px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 50%;
-  opacity: 0.8;
-  margin: 0 30px;
-}
-.hero-section .carousel-control-prev:hover,
-.hero-section .carousel-control-next:hover {
-  background: rgba(255, 255, 255, 0.25);
-  opacity: 1;
+  display: none !important;
 }
 
 /* 2. QUOTE TICKER BAR */
