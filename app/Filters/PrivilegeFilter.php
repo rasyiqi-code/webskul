@@ -16,6 +16,12 @@ class PrivilegeFilter implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         $userPrivileges = session('user_privileges');
+
+        // Jika user memiliki akses wildcard '*', bypass pemeriksaan privilege
+        if (in_array('*', $userPrivileges ?? [])) {
+            return;
+        }
+
         $segment1       = service('uri')->getSegment(1);
 
         // Jika user tidak punya privilege untuk segment ini, redirect ke beranda

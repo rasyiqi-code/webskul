@@ -241,16 +241,17 @@
 				</div>
 				<div class="box-body">
 					<form class="form-horizontal">
+						<?php $agent = \Config\Services::request()->getUserAgent(); ?>
 						<div class="form-group">
 							<label class="col-sm-4 control-label">Sistem Operasi</label>
 							<div class="col-sm-8">
-								<p class="form-control-static"><?=$this->agent->platform();?></p>
+								<p class="form-control-static"><?=$agent->getPlatform();?></p>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-4 control-label">Browser</label>
 							<div class="col-sm-8">
-								<p class="form-control-static"><?=$this->agent->browser();?></p>
+								<p class="form-control-static"><?=$agent->getBrowser();?></p>
 							</div>
 						</div>
 						<div class="form-group">
@@ -291,7 +292,7 @@
 				<div class="box-body p-0">
 					<table class="table table-striped" style="border:0;">
 						<tbody>
-							<?php foreach($last_active->getResult() as $row) { ?>
+							<?php foreach($last_active as $row) { ?>
 								<tr>
 									<td><?=$row->full_name;?></td>
 									<td><i class="fa fa-calendar"></i> <?=$row->last_active;?></td>
@@ -330,7 +331,7 @@
 				</div>
 				<div class="box-body">
 					<ul class="products-list product-list-in-box">
-						<?php foreach($recent_comments->getResult() as $row) { ?>
+						<?php foreach($recent_comments as $row) { ?>
 							<li class="item">
 								<span class="product-description">
 									Pengirim : <a href="<?=$row->comment_url;?>" target="_blank"><?=$row->comment_author;?></a> on <a href="<?=site_url('read/'.$row->comment_post_id.'/'.$row->post_slug);?>" target="_blank"><?=$row->post_title;?></a>

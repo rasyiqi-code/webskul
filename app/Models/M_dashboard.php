@@ -9,41 +9,68 @@ class M_dashboard extends Model
     public function widgetBox()
     {
         $db = db_connect();
-        $data = [];
+        $data = new \stdClass();
 
-        $data['students'] = $db->table('students')
-            ->where('is_deleted', 'false')
+        $data->students = $db->table('users')
+            ->where('is_student', 'true')
             ->where('is_alumni', 'false')
-            ->countAllResults();
-
-        $data['employees'] = $db->table('employees')
             ->where('is_deleted', 'false')
             ->countAllResults();
 
-        $data['alumni'] = $db->table('students')
+        $data->employees = $db->table('users')
+            ->where('is_employee', 'true')
             ->where('is_deleted', 'false')
+            ->countAllResults();
+
+        $data->alumni = $db->table('users')
             ->where('is_alumni', 'true')
-            ->countAllResults();
-
-        $data['posts'] = $db->table('posts')
             ->where('is_deleted', 'false')
             ->countAllResults();
 
-        $data['comments'] = $db->table('comments')
+        $data->posts = $db->table('posts')
+            ->where('post_type', 'post')
             ->where('is_deleted', 'false')
             ->countAllResults();
 
-        $data['messages'] = $db->table('comments')
+        $data->pages = $db->table('posts')
+            ->where('post_type', 'page')
+            ->where('is_deleted', 'false')
+            ->countAllResults();
+
+        $data->comments = $db->table('comments')
+            ->where('comment_type', 'comment')
+            ->where('is_deleted', 'false')
+            ->countAllResults();
+
+        $data->messages = $db->table('comments')
             ->where('comment_type', 'message')
             ->where('is_deleted', 'false')
             ->countAllResults();
 
-        $data['registrants'] = $db->table('students')
+        $data->registrants = $db->table('users')
             ->where('is_prospective_student', 'true')
             ->where('is_deleted', 'false')
             ->countAllResults();
 
-        $data['subscribers'] = $db->table('subscribers')
+        $data->subscribers = $db->table('subscribers')
+            ->countAllResults();
+
+        $data->categories = $db->table('categories')
+            ->where('category_type', 'post')
+            ->where('is_deleted', 'false')
+            ->countAllResults();
+
+        $data->tags = $db->table('tags')
+            ->where('is_deleted', 'false')
+            ->countAllResults();
+
+        $data->links = $db->table('links')
+            ->where('link_type', 'link')
+            ->where('is_deleted', 'false')
+            ->countAllResults();
+
+        $data->quotes = $db->table('quotes')
+            ->where('is_deleted', 'false')
             ->countAllResults();
 
         return $data;

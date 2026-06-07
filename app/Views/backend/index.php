@@ -110,19 +110,19 @@
 						<div class="modal-body">
 							<dl class="dl-horizontal">
 								<dt>Nama Aplikasi</dt>
-								<dd><?=config_item('apps')?></dd>
+								<dd><?=config('Webmaster')->apps?></dd>
 
 								<dt>Versi</dt>
-								<dd><?=config_item('version')?></dd>
+								<dd><?=config('Webmaster')->version?></dd>
 
 								<dt>Pengembang</dt>
 								<dd><a href="https://www.facebook.com/antonsofyan">Anton Sofyan</a></dd>
 
 								<dt>Email</dt>
-								<dd><?=config_item('email')?></dd>
+								<dd><?=config('Webmaster')->email?></dd>
 
 								<dt>Link</dt>
-								<dd><a href="<?=config_item('website')?>">sekolahku.web.id</a></dd>
+								<dd><a href="<?=config('Webmaster')->website?>">sekolahku.web.id</a></dd>
 
 								<dt>Copyright</dt>
 								<dd>&copy; 2014-<?=date('Y')?></dd>
@@ -142,7 +142,7 @@
 
 			<footer class="main-footer">
 				<div class="pull-right hidden-xs">
-					<p>Powered by <a href="<?=$this->config->item('website');?>" target="_blank"><?=$this->config->item('apps');?> <?=$this->config->item('version');?></a></p>
+					<p>Powered by <a href="<?=config('Webmaster')->website;?>" target="_blank"><?=config('Webmaster')->apps;?> <?=config('Webmaster')->version;?></a></p>
 				</div>
 				<p>Copyright &copy; <?=date('Y');?> <?=__session('school_profile')['school_name']?>. All rights reserved.</p>
 			</footer>

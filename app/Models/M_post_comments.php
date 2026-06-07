@@ -11,7 +11,7 @@ class M_post_comments extends Model
     public function getRecentComments($limit = 5)
     {
         return $this->select('comments.id, comments.comment_author, comments.comment_content, comments.created_at, posts.post_title')
-            ->join('posts', 'posts.id = comments.post_id', 'left')
+            ->join('posts', 'posts.id = comments.comment_post_id', 'left')
             ->where('comments.comment_type', 'comment')
             ->where('comments.is_deleted', 'false')
             ->orderBy('comments.created_at', 'DESC')
