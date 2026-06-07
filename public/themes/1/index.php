@@ -128,66 +128,20 @@
 		</div>
 	</header>
 
-	<!-- Hero / Carousel (homepage only) -->
-	<?php if ( ! service('uri')->getSegment(1)) { ?>
-		<?php $query = get_image_sliders(); if ($query->getNumRows() > 0) { ?>
-			<section class="hero-carousel">
-				<div id="heroCarousel" class="carousel slide" data-ride="carousel">
-					<ol class="carousel-indicators">
-						<?php $idx = 0; foreach($query->getResult() as $row) { ?>
-							<li data-target="#heroCarousel" data-slide-to="<?=$idx?>" <?=$idx == 0 ? 'class="active"' : ''?>></li>
-						<?php $idx++; } ?>
-					</ol>
-					<div class="carousel-inner">
-						<?php $idx = 0; foreach($query->getResult() as $row) { ?>
-							<div class="carousel-item <?=$idx == 0 ? 'active' : ''?>">
-								<img src="<?=base_url('media_library/image_sliders/'.$row->image);?>" class="d-block w-100" alt="<?=$row->caption?>">
-								<div class="carousel-overlay">
-									<div class="container">
-										<div class="carousel-caption">
-											<p><?=$row->caption;?></p>
-										</div>
-									</div>
-								</div>
-							</div>
-						<?php $idx++; } ?>
-					</div>
-					<a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev">
-						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					</a>
-					<a class="carousel-control-next" href="#heroCarousel" role="button" data-slide="next">
-						<span class="carousel-control-next-icon" aria-hidden="true"></span>
-					</a>
-				</div>
-			</section>
-		<?php } ?>
-
-		<?php $query = get_quotes(); if ($query->getNumRows() > 0) { ?>
-			<section class="quote-bar">
-				<div class="container">
-					<div class="quote-inner">
-						<div class="quote-icon"><i class="fa fa-quote-right"></i></div>
-						<div class="quote-text">
-							<ul id="quote">
-								<?php foreach($query->getResult() as $row) { ?>
-									<li>"<?=$row->quote?>" — <strong><?=$row->quote_by?></strong></li>
-								<?php } ?>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</section>
-		<?php } ?>
-	<?php } ?>
-
 	<!-- Main Content -->
-	<main class="main-content">
-		<div class="container">
-			<div class="row">
-				<?php echo $this->include($content)?>
+	<?php if ( ! service('uri')->getSegment(1)) { ?>
+		<main class="main-content-home">
+			<?php echo $this->include($content)?>
+		</main>
+	<?php } else { ?>
+		<main class="main-content">
+			<div class="container">
+				<div class="row">
+					<?php echo $this->include($content)?>
+				</div>
 			</div>
-		</div>
-	</main>
+		</main>
+	<?php } ?>
 
 	<!-- Footer -->
 	<footer class="site-footer">
