@@ -325,59 +325,80 @@
 </section>
 
 <!-- 8. PANEL INTERAKSI PUBLIK (POLLING & NEWSLETTER) -->
+<?php $question = get_active_question(); ?>
 <section class="py-5 bg-dark-blue text-white interaction-section position-relative">
     <div class="container">
-        <div class="row">
-            <!-- Jajak Pendapat / Polling -->
-            <div class="col-lg-6 mb-5 mb-lg-0 pr-lg-5 border-right-custom">
-                <h4 class="font-weight-bold text-white mb-3">
-                    <i class="fa fa-bar-chart text-accent mr-2"></i> Jajak Pendapat
-                </h4>
-                <div class="section-divider bg-accent mb-4"></div>
-                <?php $question = get_active_question(); if ($question) { ?>
+        <?php if ($question) { ?>
+            <!-- JIKA JAJAK PENDAPAT AKTIF (TAMPILKAN LAYOUT 2 KOLOM) -->
+            <div class="row align-items-center">
+                <!-- Jajak Pendapat -->
+                <div class="col-lg-6 mb-5 mb-lg-0 pr-lg-5 border-right-custom">
+                    <div class="mb-4">
+                        <span class="section-tagline text-accent">Suara Anda</span>
+                        <h3 class="font-weight-bold text-white mb-2">Jajak Pendapat</h3>
+                        <div class="section-divider bg-accent mb-0" style="width: 40px; height: 3px;"></div>
+                    </div>
                     <div class="polling-box p-4 bg-glassmorphism rounded-custom">
-                        <h6 class="font-weight-bold text-white mb-3"><?=$question->question?></h6>
+                        <h6 class="font-weight-bold text-white mb-3"><i class="fa fa-question-circle text-accent mr-2"></i> <?=$question->question?></h6>
                         <form id="poll-form" class="mb-3">
                             <?php $options = get_answers($question->id); foreach($options->getResult() as $option) { ?>
-                                <div class="custom-control custom-radio mb-2">
+                                <div class="custom-control custom-radio mb-3">
                                     <input type="radio" id="answer_id_<?=$option->id?>" name="answer_id" value="<?=$option->id?>" class="custom-control-input">
                                     <label class="custom-control-label text-light-50" for="answer_id_<?=$option->id?>"><?=$option->answer?></label>
                                 </div>
                             <?php } ?>
                         </form>
-                        <div class="btn-group">
-                            <button type="button" onclick="vote(); return false;" class="btn btn-accent px-4 font-weight-bold">
-                                <i class="fa fa-send mr-1"></i> Kirim Pilihan
+                        <div class="d-flex align-items-center">
+                            <button type="button" onclick="vote(); return false;" class="btn btn-accent px-4 py-2 font-weight-bold rounded-pill shadow-sm">
+                                <i class="fa fa-paper-plane mr-2"></i> Kirim Pilihan
                             </button>
-                            <a href="<?=site_url('hasil-jajak-pendapat')?>" class="btn btn-outline-light-custom-sm ml-2">
+                            <a href="<?=site_url('hasil-jajak-pendapat')?>" class="btn btn-link text-accent ml-3 font-weight-bold">
                                 <i class="fa fa-bar-chart mr-1"></i> Lihat Hasil
                             </a>
                         </div>
                     </div>
-                <?php } else { ?>
-                    <p class="text-light-50">Saat ini tidak ada jajak pendapat aktif.</p>
-                <?php } ?>
-            </div>
+                </div>
 
-            <!-- Langganan Informasi / Newsletter -->
-            <div class="col-lg-6 pl-lg-5">
-                <h4 class="font-weight-bold text-white mb-3">
-                    <i class="fa fa-envelope text-accent mr-2"></i> Berlangganan Berita
-                </h4>
-                <div class="section-divider bg-accent mb-4"></div>
-                <p class="text-light-50 mb-4">Dapatkan update informasi penting, kegiatan sekolah, dan rilis berita terbaru langsung ke kotak masuk email Anda secara gratis.</p>
-                <div class="newsletter-box p-4 bg-glassmorphism rounded-custom">
-                    <div class="input-group">
-                        <input type="email" id="subscriber" onkeydown="if (event.keyCode == 13) { subscribe(); return false; }" class="form-control bg-white-10 text-white border-0 px-4 py-4 rounded-custom-left" placeholder="Masukkan alamat email Anda...">
-                        <div class="input-group-append">
-                            <button type="button" onclick="subscribe();" class="btn btn-accent px-4 rounded-custom-right">
-                                <i class="fa fa-paper-plane mr-1"></i> Daftar
+                <!-- Berlangganan Berita -->
+                <div class="col-lg-6 pl-lg-5">
+                    <div class="mb-4">
+                        <span class="section-tagline text-accent">Tetap Terhubung</span>
+                        <h3 class="font-weight-bold text-white mb-2">Berlangganan Berita</h3>
+                        <div class="section-divider bg-accent mb-0" style="width: 40px; height: 3px;"></div>
+                    </div>
+                    <p class="text-light-50 mb-4">Dapatkan informasi kegiatan, prestasi, dan pengumuman terbaru langsung di email Anda.</p>
+                    <div class="newsletter-wrapper-modern">
+                        <div class="newsletter-input-group">
+                            <input type="email" id="subscriber" onkeydown="if (event.keyCode == 13) { subscribe(); return false; }" class="form-control-newsletter" placeholder="Masukkan alamat email Anda...">
+                            <button type="button" onclick="subscribe();" class="btn-newsletter-submit">
+                                Daftar <i class="fa fa-paper-plane ml-1"></i>
                             </button>
                         </div>
+                        <small class="text-light-50 d-block mt-2 ml-3 font-italic"><i class="fa fa-lock mr-1 text-accent"></i> Kami menjamin privasi email Anda dan bebas spam.</small>
                     </div>
-                    <small class="text-light-50 d-block mt-2 font-italic"><i class="fa fa-lock mr-1"></i> Kami menjamin privasi email Anda dan bebas spam.</small>
                 </div>
             </div>
-        </div>
+        <?php } else { ?>
+            <!-- JIKA JAJAK PENDAPAT TIDAK AKTIF (TAMPILKAN NEWSLETTER SAJA DI TENGAH) -->
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-7 col-md-9">
+                    <div class="mb-3">
+                        <span class="section-tagline text-accent">Berlangganan</span>
+                        <h2 class="font-weight-bold text-white mb-2">Dapatkan Berita & Update Terbaru</h2>
+                        <div class="section-divider bg-accent mx-auto" style="width: 50px; height: 3px;"></div>
+                    </div>
+                    <p class="text-light-50 mb-4 px-lg-4">Dapatkan informasi penting, pengumuman resmi, kegiatan sekolah, dan rilis berita terbaru langsung ke kotak masuk email Anda secara gratis.</p>
+                    <div class="newsletter-wrapper-modern text-left">
+                        <div class="newsletter-input-group">
+                            <input type="email" id="subscriber" onkeydown="if (event.keyCode == 13) { subscribe(); return false; }" class="form-control-newsletter" placeholder="Masukkan alamat email Anda...">
+                            <button type="button" onclick="subscribe();" class="btn-newsletter-submit">
+                                Berlangganan <i class="fa fa-chevron-right ml-1"></i>
+                            </button>
+                        </div>
+                        <small class="text-light-50 d-block mt-2 ml-3 text-center font-italic"><i class="fa fa-lock mr-1 text-accent"></i> Kami menjamin privasi email Anda dan bebas spam.</small>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
     </div>
 </section>
