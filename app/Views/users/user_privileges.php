@@ -1,4 +1,4 @@
-echo $this->include('backend/grid_index');?>
+<?php echo $this->include('backend/grid_index');?>
 <script type="text/javascript">
 DS.UserGroups = _H.StrToObject('<?=$user_group_dropdown;?>');
 DS.Modules = _H.StrToObject('<?=$module_dropdown;?>');

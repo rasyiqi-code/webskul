@@ -1,4 +1,4 @@
-echo $this->include('backend/grid_index');?>
+<?php echo $this->include('backend/grid_index');?>
 <script type="text/javascript">
 DS.Rooms = _H.StrToObject('<?=$rooms_dropdown;?>');
 var _grid = 'SCHEDULE_DETAILS', _form = _grid + '_FORM';

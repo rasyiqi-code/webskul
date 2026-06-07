@@ -24,7 +24,7 @@ class Menus extends \App\Controllers\AdminController
     {
         if ($this->request->isAJAX()) {
             $query = $this->m_menus->get_menus();
-            $this->vars['rows'] = $query;
+            $this->vars['rows'] = is_array($query) || $query instanceof \CodeIgniter\Database\ResultInterface ? $query->getResult() : $query;
             return $this->response->setContentType('application/json')->setJSON($this->vars);
         }
     }
@@ -34,7 +34,7 @@ class Menus extends \App\Controllers\AdminController
         if ($this->request->isAJAX()) {
             $m_pages = model('App\Models\M_pages');
             $query = $m_pages->get_pages();
-            $this->vars['rows'] = $query;
+            $this->vars['rows'] = is_array($query) || $query instanceof \CodeIgniter\Database\ResultInterface ? $query->getResult() : $query;
             return $this->response->setContentType('application/json')->setJSON($this->vars);
         }
     }
@@ -44,7 +44,7 @@ class Menus extends \App\Controllers\AdminController
         if ($this->request->isAJAX()) {
             $m_categories = model('App\Models\M_categories');
             $query = $m_categories->getCategories('post');
-            $this->vars['rows'] = $query;
+            $this->vars['rows'] = is_array($query) || $query instanceof \CodeIgniter\Database\ResultInterface ? $query->getResult() : $query;
             return $this->response->setContentType('application/json')->setJSON($this->vars);
         }
     }
@@ -54,7 +54,7 @@ class Menus extends \App\Controllers\AdminController
         if ($this->request->isAJAX()) {
             $m_categories = model('App\Models\M_categories');
             $query = $m_categories->getCategories('file');
-            $this->vars['rows'] = $query;
+            $this->vars['rows'] = is_array($query) || $query instanceof \CodeIgniter\Database\ResultInterface ? $query->getResult() : $query;
             return $this->response->setContentType('application/json')->setJSON($this->vars);
         }
     }

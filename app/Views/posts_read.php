@@ -1,4 +1,4 @@
-echo $this->include('backend/grid_index');?>
+<?php echo $this->include('backend/grid_index');?>
 <script type="text/javascript">
 	var _grid = 'POSTS';
 	new GridBuilder( _grid , {

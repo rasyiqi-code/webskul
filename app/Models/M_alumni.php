@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use CodeIgniter\Model;
+use App\Models\BaseModel;
 
-class M_alumni extends Model
+class M_alumni extends BaseModel
 {
     protected $table = 'users';
     protected $primaryKey = 'id';

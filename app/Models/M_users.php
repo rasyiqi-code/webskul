@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use CodeIgniter\Model;
+use App\Models\BaseModel;
 
-class M_users extends Model
+class M_users extends BaseModel
 {
     protected $table = 'users';
     protected $primaryKey = 'id';
@@ -21,6 +21,16 @@ class M_users extends Model
             ->where('is_deleted', 'false')
             ->get()
             ->getResultArray();
+    }
+
+    public function get_user_by_email($email)
+    {
+        $row = $this->select('id, email, full_name, user_group_id')
+            ->where('email', $email)
+            ->where('is_deleted', 'false')
+            ->get()
+            ->getRowArray();
+        return $row ?: null;
     }
 
     public function lastActive($id)
@@ -73,5 +83,71 @@ class M_users extends Model
             ->limit(10)
             ->get()
             ->getResult();
+    }
+
+    /**
+     * CI3-style get_where dengan filter kategori user.
+     * Pemakaian: $this->m_users->get_where('admin|employee|student', $keyword, 'rows', $limit, $offset)
+     */
+    public function getWhere(string $userGroup = 'admin', string $keyword = '', string $returnType = 'count', int $limit = 0, int $offset = 0)
+    {
+        $builder = $this->db->table($this->table . ' x1');
+        $builder->select('
+            x1.id, x1.email, x1.full_name, x1.user_group_id, x2.user_group,
+            x1.is_super_admin, x1.is_admin, x1.is_employee, x1.is_student, x1.is_deleted, x1.last_active
+        ');
+        $builder->join('user_groups x2', 'x1.user_group_id = x2.id', 'LEFT');
+
+        if ($userGroup === 'admin') {
+            $builder->where('x1.is_admin', 'true');
+        } elseif ($userGroup === 'employee') {
+            $builder->where('x1.is_employee', 'true');
+        } elseif ($userGroup === 'student') {
+            $builder->where('x1.is_student', 'true');
+        } elseif ($userGroup === 'teacher') {
+            $builder->where('x1.is_employee', 'true');
+            $builder->where('x1.employment_type_id IS NOT NULL');
+        }
+
+        if (!empty($keyword)) {
+            $builder->groupStart();
+            $builder->like('x1.email', $keyword);
+            $builder->orLike('x1.full_name', $keyword);
+            $builder->groupEnd();
+        }
+
+        $builder->where('x1.is_deleted', 'false');
+
+        if ($returnType === 'count') return $builder->countAllResults();
+        if ($limit > 0) $builder->limit($limit, $offset);
+        return $builder->get();
+    }
+
+    /**
+     * CI3-style dropdown untuk pilih user.
+     * Pemakaian: $this->m_users->dropdown('teacher')
+     */
+    public function dropdown(string $userGroup = 'admin')
+    {
+        $data = [];
+        $builder = $this->db->table($this->table . ' x1');
+        $builder->select('x1.id, x1.full_name');
+        if ($userGroup === 'admin') {
+            $builder->where('x1.is_admin', 'true');
+        } elseif ($userGroup === 'employee') {
+            $builder->where('x1.is_employee', 'true');
+        } elseif ($userGroup === 'student') {
+            $builder->where('x1.is_student', 'true');
+        } elseif ($userGroup === 'teacher') {
+            $builder->where('x1.is_employee', 'true');
+            $builder->where('x1.employment_type_id IS NOT NULL');
+        }
+        $builder->where('x1.is_deleted', 'false');
+        $builder->orderBy('x1.full_name', 'ASC');
+        $query = $builder->get();
+        foreach ($query->getResult() as $row) {
+            $data[$row->id] = $row->full_name;
+        }
+        return $data;
     }
 }

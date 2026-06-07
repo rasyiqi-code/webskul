@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use CodeIgniter\Model;
+use App\Models\BaseModel;
 
-class M_exam_schedules extends Model
+class M_exam_schedules extends BaseModel
 {
     protected $table = 'admission_exam_schedules';
     protected $primaryKey = 'id';

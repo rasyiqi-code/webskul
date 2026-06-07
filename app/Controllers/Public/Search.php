@@ -20,7 +20,7 @@ class Search extends PublicController
             }
         } else {
             $this->validation->setRules([
-                'keyword' => ['label' => 'Kata Kunci Pencarian', 'rules' => 'trim|required|alpha_numeric_spaces|max_length[100]'],
+                'keyword' => ['label' => 'Kata Kunci Pencarian', 'rules' => 'trim|required|alpha_numeric_space|max_length[100]'],
             ]);
 
             if (!$this->validation->withRequest($this->request)->run()) {

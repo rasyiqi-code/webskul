@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use CodeIgniter\Model;
+use App\Models\BaseModel;
 
-class M_semester_report_scores extends Model
+class M_semester_report_scores extends BaseModel
 {
     protected $table = 'semester_report_scores';
     protected $primaryKey = 'id';

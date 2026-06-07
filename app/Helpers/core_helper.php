@@ -293,3 +293,17 @@ if (!function_exists('dd')) {
         die();
     }
 }
+
+if (!function_exists('has_privilege')) {
+    /**
+     * Memeriksa apakah user memiliki hak akses ke modul tertentu.
+     * Mendukung bypass wildcard '*' untuk Super Admin.
+     */
+    function has_privilege(string $module_name): bool {
+        $user_privileges = session('user_privileges');
+        if (in_array('*', $user_privileges ?? [])) {
+            return true;
+        }
+        return in_array($module_name, $user_privileges ?? []);
+    }
+}

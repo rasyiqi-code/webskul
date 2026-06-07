@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use CodeIgniter\Model;
+use App\Models\BaseModel;
 
-class M_categories extends Model
+class M_categories extends BaseModel
 {
     protected $table = 'categories';
     protected $primaryKey = 'id';

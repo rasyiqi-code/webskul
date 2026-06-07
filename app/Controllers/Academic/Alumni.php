@@ -121,7 +121,7 @@ class Alumni extends AdminController
     {
         $this->validation->setRules([
             'full_name' => ['label' => 'Nama Lengkap', 'rules' => 'trim|required'],
-            'nis' => ['label' => 'NIS', 'rules' => 'trim|alpha_numeric_spaces'],
+            'nis' => ['label' => 'NIS', 'rules' => 'trim|alpha_numeric_space'],
             'email' => ['label' => 'Email', 'rules' => 'trim|required|valid_email'],
         ]);
         return $this->validation->withRequest($this->request)->run();

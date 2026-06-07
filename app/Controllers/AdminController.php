@@ -137,7 +137,6 @@ class AdminController extends BaseController
 
         $image = \Config\Services::image()
             ->withFile($path . '/' . $fileName)
-            ->resist(false, false)
             ->resize($width, 0, true);
         $image->save($path . '/' . $fileName);
     }

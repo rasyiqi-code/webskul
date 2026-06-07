@@ -13,12 +13,12 @@
 	<meta name="robots" content="index,follow" />
 	<meta name="revised" content="Sunday, July 18th, 2010, 5:15 pm" />
 	<meta name="Classification" content="Education">
-	<meta name="author" content="Anton Sofyan, 4ntonsofyan@gmail.com">
-	<meta name="designer" content="Anton Sofyan, 4ntonsofyan@gmail.com">
-	<meta name="reply-to" content="4ntonsofyan@gmail.com">
-	<meta name="owner" content="Anton Sofyan">
-	<meta name="url" content="https://www.sekolahku.web.id">
-	<meta name="identifier-URL" content="https://www.sekolahku.web.id">
+	<meta name="author" content="Rasyiqi, no-reply@webskul.web.id">
+	<meta name="designer" content="Rasyiqi, no-reply@webskul.web.id">
+	<meta name="reply-to" content="no-reply@webskul.web.id">
+	<meta name="owner" content="Rasyiqi">
+	<meta name="url" content="https://www.webskul.web.id">
+	<meta name="identifier-URL" content="https://www.webskul.web.id">
 	<meta name="category" content="Admission, Education">
 	<meta name="coverage" content="Worldwide">
 	<meta name="distribution" content="Global">
@@ -46,7 +46,7 @@
 	<?=link_tag('assets/plugins/select2/select2.css');?>
 	<?=link_tag('assets/plugins/jquery.tagsinput/jquery.tagsinput.min.css');?>
 	<?=link_tag('assets/css/loading.css');?>
-	<?=link_tag('assets/css/backend.style.css');?>
+	<?=link_tag('assets/css/backend.style.css?v=20260607');?>
 	<script type="text/javascript">
 	const _BASE_URL = '<?=base_url();?>';
 	const _CURRENT_URL = '<?=current_url();?>';
@@ -79,8 +79,8 @@
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-question-circle-o"></i> BANTUAN <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="https://www.sekolahku.web.id" target="_blank"><i class="fa fa-globe"></i> Situs Resmi</a></li>
-								<li><a href="https://www.facebook.com/groups/cmssekolahku" target="_blank"><i class="fa fa-facebook"></i> Forum Diskusi</a></li>
+								<li><a href="https://www.webskul.web.id" target="_blank"><i class="fa fa-globe"></i> Situs Resmi</a></li>
+								<li><a href="https://www.facebook.com/groups/cmswebskul" target="_blank"><i class="fa fa-facebook"></i> Forum Diskusi</a></li>
 								<li><a href="#" data-toggle="modal" data-target="#cms-info"><i class="fa fa-info-circle"></i> Tentang</a></li>
 							</ul>
 						</li>
@@ -116,13 +116,13 @@
 								<dd><?=config('Webmaster')->version?></dd>
 
 								<dt>Pengembang</dt>
-								<dd><a href="https://www.facebook.com/antonsofyan">Anton Sofyan</a></dd>
+								<dd><a href="https://www.facebook.com/rasyiqi">Rasyiqi</a></dd>
 
 								<dt>Email</dt>
 								<dd><?=config('Webmaster')->email?></dd>
 
 								<dt>Link</dt>
-								<dd><a href="<?=config('Webmaster')->website?>">sekolahku.web.id</a></dd>
+								<dd><a href="<?=config('Webmaster')->website?>">webskul.web.id</a></dd>
 
 								<dt>Copyright</dt>
 								<dd>&copy; 2014-<?=date('Y')?></dd>
@@ -130,7 +130,7 @@
 							<br>
 							<p>SYARAT DAN KETENTUAN :</p>
 							<ol>
-								<li>Tidak diperkenankan memperjualbelikan CMS ini tanpa seizin dari <a href="https://www.facebook.com/antonsofyan">Pengembang CMS Sekolahku</a>.</li>
+								<li>Tidak diperkenankan memperjualbelikan CMS ini tanpa seizin dari <a href="https://www.facebook.com/rasyiqi">Pengembang Webskul</a>.</li>
 								<li>Tidak diperkenankan membuat Aplikasi turunan dari CMS ini dengan nama baru.</li>
 								<li>Tidak diperkenankan menghapus kode sumber aplikasi yang berada di bagian footer CMS.</li>
 								<li>Tidak diperkenankan menyertakan link komersil seperti Layanan Hosting maupun domain yang menguntungkan sepihak.</li>

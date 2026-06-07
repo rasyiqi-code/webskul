@@ -38,7 +38,7 @@
 			<div class="form-group row mb-2">
 				<label for="comment_content" class="col-sm-3 control-label">Pesan <span style="color: red">*</span></label>
 				<div class="col-sm-9">
-					<textarea name="name" class="form-control form-control-sm rounded-0 border border-secondary" id="comment_content" rows="4"></textarea>
+					<textarea name="comment_content" class="form-control form-control-sm rounded-0 border border-secondary" id="comment_content" rows="4"></textarea>
 				</div>
 			</div>
 			<?php if (NULL !== __session('general')['recaptcha_status'] && __session('general')['recaptcha_status'] == 'enable') { ?>

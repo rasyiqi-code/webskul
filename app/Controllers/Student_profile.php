@@ -5,7 +5,7 @@ namespace App\Controllers;
 class Student_profile extends AdminController
 {
     protected $pk    = 'id';
-    protected $table = 'students';
+    protected $table = 'users';
 
     /** @var \App\Models\M_students */
     protected $mStudents;

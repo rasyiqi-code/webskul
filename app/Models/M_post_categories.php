@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use CodeIgniter\Model;
+use App\Models\BaseModel;
 
-class M_post_categories extends Model
+class M_post_categories extends BaseModel
 {
     protected $table = 'categories';
     protected $primaryKey = 'id';
@@ -48,9 +48,21 @@ class M_post_categories extends Model
         return $data;
     }
 
-    public function save(array $dataset)
+    public function save($row): bool
+    {
+        $dataset = is_array($row) ? $row : (array) $row;
+        $query = $this->db->table($this->table)->insert($dataset);
+        return (bool) $query;
+    }
+
+    /**
+     * Insert kategori baru dan kembalikan insert_id (untuk kompatibilitas CI3).
+     * Method ini dipanggil oleh Blog/Post_categories::save() yang mengharapkan
+     * nilai integer insert_id, bukan boolean.
+     */
+    public function insertCategory(array $dataset): int
     {
         $query = $this->db->table($this->table)->insert($dataset);
-        return $query ? $this->db->insertID() : 0;
+        return $query ? (int) $this->db->insertID() : 0;
     }
 }

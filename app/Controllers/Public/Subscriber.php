@@ -7,7 +7,7 @@ use App\Libraries\Token;
 
 class Subscriber extends PublicController
 {
-    public function index()
+    public function save()
     {
         if (!$this->request->isAJAX()) {
             return $this->response->setStatusCode(404);

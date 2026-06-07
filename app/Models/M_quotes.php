@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use CodeIgniter\Model;
+use App\Models\BaseModel;
 
-class M_quotes extends Model
+class M_quotes extends BaseModel
 {
     protected $table = 'quotes';
     protected $primaryKey = 'id';

@@ -18,7 +18,7 @@
     <dc:language><?=$page_language; ?></dc:language>
     <dc:creator><?=$creator_email; ?></dc:creator>
     <dc:rights>Copyright <?=gmdate("Y", time()); ?></dc:rights>
-    <admin:generatorAgent rdf:resource="https://www.sekolahku.web.id/" />
+    <admin:generatorAgent rdf:resource="https://www.webskul.web.id/" />
     <?php foreach($posts->getResult() as $row) { ?>
         <item>
             <title><?=xml_convert($row->post_title); ?></title>

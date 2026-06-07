@@ -1,4 +1,4 @@
-echo $this->include('backend/grid_index');?>
+<?php echo $this->include('backend/grid_index');?>
 <script type="text/javascript">
 DS.Buildings = _H.StrToObject('<?=get_options('building')?>');
 var _grid = 'ROOMS', _form = _grid + '_FORM';

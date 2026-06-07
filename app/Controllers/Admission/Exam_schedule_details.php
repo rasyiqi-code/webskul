@@ -14,7 +14,12 @@ class Exam_schedule_details extends AdminController
 
     public function index()
     {
-        $subject_setting_detail_id = _toInteger(service('uri')->getSegment(4));
+        $subject_setting_detail_id = 0;
+        try {
+            $subject_setting_detail_id = _toInteger(service('uri')->getSegment(4));
+        } catch (\Throwable $e) {
+            $subject_setting_detail_id = 0;
+        }
         if (_isNaturalNumber($subject_setting_detail_id)) {
             $helper = model('App\Models\M_helper');
             $query = $helper->rowObject($this->pk, $subject_setting_detail_id, 'admission_subject_setting_details');

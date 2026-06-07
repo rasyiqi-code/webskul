@@ -1,4 +1,4 @@
-echo $this->include('backend/grid_index');?>
+<?php echo $this->include('backend/grid_index');?>
 <script type="text/javascript">
 DS.Questions = _H.StrToObject('<?=$parent_data;?>');
 var _grid = 'ANSWERS', _form = _grid + '_FORM';

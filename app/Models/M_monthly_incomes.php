@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use CodeIgniter\Model;
+use App\Models\BaseModel;
 
-class M_monthly_incomes extends Model
+class M_monthly_incomes extends BaseModel
 {
     protected $table = 'options';
     protected $primaryKey = 'id';

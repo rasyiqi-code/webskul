@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use CodeIgniter\Model;
+use App\Models\BaseModel;
 
-class M_dashboard extends Model
+class M_dashboard extends BaseModel
 {
     public function widgetBox()
     {
@@ -38,7 +38,7 @@ class M_dashboard extends Model
             ->countAllResults();
 
         $data->comments = $db->table('comments')
-            ->where('comment_type', 'comment')
+            ->where('comment_type', 'post')
             ->where('is_deleted', 'false')
             ->countAllResults();
 

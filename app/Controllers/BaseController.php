@@ -13,11 +13,10 @@ abstract class BaseController extends Controller
 
     protected $validation;
 
-    protected $helpers = ['url', 'html', 'form', 'antonsofyan', 'datasource', 'recaptcha', 'setting', 'text', 'blog'];
+    protected $helpers = ['url', 'html', 'form', 'core', 'datasource', 'recaptcha', 'setting', 'text', 'blog', 'ci3'];
 
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
-        // Muat seluruh helper bawaan dan kustom secara eksplisit
         helper($this->helpers);
 
         parent::initController($request, $response, $logger);
@@ -38,6 +37,7 @@ abstract class BaseController extends Controller
     {
         if (session('settings_loaded')) {
             $this->loadFormSettings();
+            $this->loadAcademicSession();
             return;
         }
 
@@ -52,6 +52,7 @@ abstract class BaseController extends Controller
 
         session()->set($sessionData);
         $this->loadFormSettings();
+        $this->loadAcademicSession();
     }
 
     private function loadFormSettings(): void
@@ -65,5 +66,51 @@ abstract class BaseController extends Controller
             session()->set('form_' . $field, $fieldSetting);
         }
         session()->set('form_settings_loaded', true);
+    }
+
+    /**
+     * Load academic year, admission phase, dan major count ke session.
+     * Pengganti hook Trigger.php milik CI3.
+     */
+    private function loadAcademicSession(): void
+    {
+        if (session('academic_session_loaded')) {
+            return;
+        }
+
+        $academicYear = model('App\Models\M_academic_years')->getActiveAcademicYear();
+        $sessionData = [];
+
+        if (isset($academicYear['admission_semester_id'])) {
+            $sessionData['admission_semester_id'] = $academicYear['admission_semester_id'];
+        }
+        if (isset($academicYear['admission_semester'])) {
+            $sessionData['admission_semester'] = $academicYear['admission_semester'];
+        }
+        if (isset($academicYear['admission_year'])) {
+            $sessionData['admission_year'] = $academicYear['admission_year'];
+        }
+        if (isset($academicYear['current_academic_year_id'])) {
+            $sessionData['current_academic_year_id'] = $academicYear['current_academic_year_id'];
+        }
+        if (isset($academicYear['current_academic_year'])) {
+            $sessionData['current_academic_year'] = $academicYear['current_academic_year'];
+        }
+        if (isset($academicYear['current_academic_semester'])) {
+            $sessionData['current_academic_semester'] = $academicYear['current_academic_semester'];
+        }
+
+        $admissionPhase = model('App\Models\M_admission_phases')->getCurrentPhase();
+        if (!empty($admissionPhase)) {
+            $sessionData['admission_phase_id']   = $admissionPhase['id'];
+            $sessionData['admission_phase']      = $admissionPhase['phase_name'];
+            $sessionData['admission_start_date'] = $admissionPhase['phase_start_date'];
+            $sessionData['admission_end_date']   = $admissionPhase['phase_end_date'];
+        }
+
+        $sessionData['major_count'] = model('App\Models\M_majors')->majorCount();
+        $sessionData['academic_session_loaded'] = true;
+
+        session()->set($sessionData);
     }
 }

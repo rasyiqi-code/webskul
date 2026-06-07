@@ -49,5 +49,80 @@ class Filters extends BaseFilters
 
     public array $methods = [];
 
-    public array $filters = [];
+    /**
+     * Filter berdasarkan pattern URI.
+     * Berlaku untuk semua URL yang cocok dengan pattern (termasuk auto-routed URL),
+     * sehingga seluruh area admin tetap terlindungi tanpa harus menulis route eksplisit
+     * untuk setiap method.
+     */
+    public array $filters = [
+        'auth' => [
+            'before' => [
+                'dashboard',
+                'dashboard/*',
+                'profile',
+                'profile/*',
+                'change_password',
+                'change_password/*',
+                'employee_profile',
+                'employee_profile/*',
+                'student_profile',
+                'student_profile/*',
+                'student_presence',
+                'student_presence/*',
+                'scholarships',
+                'scholarships/*',
+                'achievements',
+                'achievements/*',
+                'posts',
+                'posts/*',
+                'blog/*',
+                'academic/*',
+                'admission/*',
+                'appearance/*',
+                'employees/*',
+                'maintenance/*',
+                'media/*',
+                'plugins/*',
+                'reference/*',
+                'settings/*',
+                'teacher/*',
+                'users/*',
+            ],
+        ],
+        'privilege' => [
+            'before' => [
+                'dashboard',
+                'dashboard/*',
+                'profile',
+                'profile/*',
+                'change_password',
+                'change_password/*',
+                'employee_profile',
+                'employee_profile/*',
+                'student_profile',
+                'student_profile/*',
+                'student_presence',
+                'student_presence/*',
+                'scholarships',
+                'scholarships/*',
+                'achievements',
+                'achievements/*',
+                'posts',
+                'posts/*',
+                'blog/*',
+                'academic/*',
+                'admission/*',
+                'appearance/*',
+                'employees/*',
+                'maintenance/*',
+                'media/*',
+                'plugins/*',
+                'reference/*',
+                'settings/*',
+                'teacher/*',
+                'users/*',
+            ],
+        ],
+    ];
 }

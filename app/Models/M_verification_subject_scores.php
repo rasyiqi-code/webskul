@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use CodeIgniter\Model;
+use App\Models\BaseModel;
 
-class M_verification_subject_scores extends Model
+class M_verification_subject_scores extends BaseModel
 {
     protected $table = 'admission_subject_scores';
     protected $primaryKey = 'id';

@@ -32,7 +32,7 @@ class Post_categories extends \App\Controllers\AdminController
             $total_page = $limit > 0 ? ceil(_toInteger($total_rows) / _toInteger($limit)) : 1;
             $this->vars['total_page'] = _toInteger($total_page);
             $this->vars['total_rows'] = _toInteger($total_rows);
-            $this->vars['rows'] = $query;
+            $this->vars['rows'] = is_array($query) || $query instanceof \CodeIgniter\Database\ResultInterface ? $query->getResult() : $query;
             return $this->response->setContentType('application/json')->setJSON($this->vars);
         }
     }
@@ -48,7 +48,7 @@ class Post_categories extends \App\Controllers\AdminController
                     $this->vars['message'] = $this->vars['status'] == 'success' ? 'updated' : 'not_updated';
                 } else {
                     $dataset['created_by'] = session('user_id');
-                    $this->vars['insert_id'] = $this->m_post_categories->save($dataset);
+                    $this->vars['insert_id'] = $this->m_post_categories->insertCategory($dataset);
                     $this->vars['status'] = $this->vars['insert_id'] > 0 ? 'success' : 'error';
                     $this->vars['message'] = $this->vars['status'] == 'success' ? 'created' : 'not_created';
                 }

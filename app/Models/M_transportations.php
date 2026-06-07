@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use CodeIgniter\Model;
+use App\Models\BaseModel;
 
-class M_transportations extends Model
+class M_transportations extends BaseModel
 {
     protected $table = 'options';
     protected $primaryKey = 'id';

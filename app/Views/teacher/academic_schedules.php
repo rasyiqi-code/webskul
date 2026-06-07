@@ -1,4 +1,4 @@
-echo $this->include('backend/grid_index');?>
+<?php echo $this->include('backend/grid_index');?>
 <script type="text/javascript">
 var current_semester_id = '<?=$current_semester_id;?>';
 var _grid = 'ACADEMIC_SCHEDULES';

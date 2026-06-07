@@ -1,6 +1,6 @@
 /**
  * @codename    Javascript Grid Builder
- * @author      Anton Sofyan | https://facebook.com/antonsofyan
+ * @author      Rasyiqi | https://facebook.com/rasyiqi
  * @copyright   (c) 2015-2019
  */
 

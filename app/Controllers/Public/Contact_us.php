@@ -63,10 +63,10 @@ class Contact_us extends PublicController
     private function validation()
     {
         $this->validation->setRules([
-            'comment_author' => ['label' => 'Nama Lengkap', 'rules' => 'trim|required|alpha_numeric_spaces'],
+            'comment_author' => ['label' => 'Nama Lengkap', 'rules' => 'trim|required|alpha_numeric_space'],
             'comment_email' => ['label' => 'Email', 'rules' => 'trim|required|valid_email'],
-            'comment_url' => ['label' => 'URL', 'rules' => 'trim|valid_url'],
-            'comment_content' => ['label' => 'Komentar', 'rules' => 'trim|required|alpha_numeric_spaces'],
+            'comment_url' => ['label' => 'URL', 'rules' => 'permit_empty|trim|valid_url'],
+            'comment_content' => ['label' => 'Komentar', 'rules' => 'trim|required|alpha_numeric_space'],
         ]);
         return $this->validation->withRequest($this->request)->run();
     }

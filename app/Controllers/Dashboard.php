@@ -29,11 +29,28 @@ class Dashboard extends AdminController
         session()->set('sidebar_collapse', $collapse);
     }
 
+    /**
+     * Alias snake_case untuk kompatibilitas dengan JS (helper.js) yang
+     * memanggil `dashboard/sidebar_collapse` melalui auto-routing.
+     */
+    public function sidebar_collapse()
+    {
+        return $this->sidebarCollapse();
+    }
+
     public function printSessions()
     {
         if (!filter_var(session('is_super_admin'), FILTER_VALIDATE_BOOLEAN)) {
             return redirect()->to(base_url());
         }
         dd(session()->get());
+    }
+
+    /**
+     * Alias snake_case untuk kompatibilitas auto-routing CI3-style.
+     */
+    public function print_sessions()
+    {
+        return $this->printSessions();
     }
 }

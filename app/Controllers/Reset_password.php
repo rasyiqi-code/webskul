@@ -2,21 +2,17 @@
 
 namespace App\Controllers;
 
-use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
-class Reset_password extends Controller
+class Reset_password extends BaseController
 {
-    protected $helpers = ['url', 'html', 'antonsofyan', 'datasource', 'recaptcha', 'setting', 'text', 'blog'];
     protected $m_users;
 
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
         parent::initController($request, $response, $logger);
-        $timezone = session('general')['timezone'] ?? 'Asia/Jakarta';
-        date_default_timezone_set($timezone);
         $this->m_users = model('App\Models\M_users');
     }
 

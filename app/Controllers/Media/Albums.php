@@ -36,7 +36,7 @@ class Albums extends \App\Controllers\AdminController
             $total_page = $limit > 0 ? ceil(_toInteger($total_rows) / _toInteger($limit)) : 1;
             $this->vars['total_page'] = _toInteger($total_page);
             $this->vars['total_rows'] = _toInteger($total_rows);
-            $this->vars['rows'] = $query;
+            $this->vars['rows'] = is_array($query) || $query instanceof \CodeIgniter\Database\ResultInterface ? $query->getResult() : $query;
             return $this->response->setContentType('application/json')->setJSON($this->vars);
         }
     }

@@ -6,9 +6,9 @@ use CodeIgniter\Config\BaseConfig;
 
 class Webmaster extends BaseConfig
 {
-    public string $apps = 'CMS Sekolahku Premium Version';
-    public string $version = '2.5.4';
-    public string $webmaster = 'Anton Sofyan';
-    public string $email = '4ntonsofyan@gmail.com';
-    public string $website = 'https://www.sekolahku.web.id';
+    public string $apps = 'Webskul';
+    public string $version = '3.0.0';
+    public string $webmaster = 'Rasyiqi';
+    public string $email = 'no-reply@webskul.web.id';
+    public string $website = 'https://www.webskul.web.id';
 }

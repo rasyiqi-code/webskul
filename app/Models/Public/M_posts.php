@@ -2,9 +2,9 @@
 
 namespace App\Models\Public;
 
-use CodeIgniter\Model;
+use App\Models\BaseModel;
 
-class M_posts extends Model
+class M_posts extends BaseModel
 {
     protected $table = 'posts';
     protected $primaryKey = 'id';
@@ -21,7 +21,9 @@ class M_posts extends Model
         $builder->where('x1.post_type', 'post');
         $builder->where('x1.post_status', 'publish');
         $builder->where('x1.is_deleted', 'false');
-        $builder->where('x1.post_visibility', 'public');
+        if (!session('active')) {
+            $builder->where('x1.post_visibility', 'public');
+        }
         $builder->orderBy('x1.created_at', 'DESC');
         if ($limit > 0) $builder->limit($limit);
         return $builder->get();

@@ -2,20 +2,15 @@
 
 namespace App\Controllers;
 
-use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
-class Lost_password extends Controller
+class Lost_password extends BaseController
 {
-    protected $helpers = ['url', 'html', 'antonsofyan', 'datasource', 'recaptcha', 'setting', 'text', 'blog'];
-
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
         parent::initController($request, $response, $logger);
-        $timezone = session('general')['timezone'] ?? 'Asia/Jakarta';
-        date_default_timezone_set($timezone);
     }
 
     public function index()

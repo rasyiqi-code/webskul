@@ -1,4 +1,4 @@
-echo $this->include('backend/grid_index');?>
+<?php echo $this->include('backend/grid_index');?>
 <script type="text/javascript">
 DS.FileCategory = _H.StrToObject('<?=$file_category_dropdown;?>');
 var _grid = 'FILES', _form = _grid + '_FORM';

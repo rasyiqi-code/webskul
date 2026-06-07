@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use CodeIgniter\Model;
+use App\Models\BaseModel;
 
 /**
  * Model Helper
@@ -10,7 +10,7 @@ use CodeIgniter\Model;
  * Method insert() CI4 Model sengaja tidak di-override; gunakan insertData() untuk
  * menghindari konflik dengan signature parent::insert().
  */
-class M_helper extends Model
+class M_helper extends BaseModel
 {
     protected $table      = '';
     protected $primaryKey = 'id';

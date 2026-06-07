@@ -1,4 +1,4 @@
-echo $this->include('backend/grid_index');?>
+<?php echo $this->include('backend/grid_index');?>
 <script type="text/javascript">
 var _grid = 'OPTIONS';
 var _form1 = _grid + '_FORM1'; // file_allowed_types

@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use CodeIgniter\Model;
+use App\Models\BaseModel;
 
-class M_selection_process extends Model
+class M_selection_process extends BaseModel
 {
     protected $table = 'users';
     protected $primaryKey = 'id';

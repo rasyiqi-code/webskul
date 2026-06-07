@@ -54,10 +54,10 @@ class Post_comments extends PublicController
     private function validation()
     {
         $this->validation->setRules([
-            'comment_author' => ['label' => 'Nama Lengkap', 'rules' => 'trim|required|alpha_numeric_spaces'],
+            'comment_author' => ['label' => 'Nama Lengkap', 'rules' => 'trim|required|alpha_numeric_space'],
             'comment_email' => ['label' => 'Email', 'rules' => 'trim|required|valid_email'],
             'comment_url' => ['label' => 'URL', 'rules' => 'trim|valid_url'],
-            'comment_content' => ['label' => 'Komentar', 'rules' => 'trim|required|alpha_numeric_spaces'],
+            'comment_content' => ['label' => 'Komentar', 'rules' => 'trim|required|alpha_numeric_space'],
             'comment_post_id' => ['label' => 'ID Post', 'rules' => 'trim|required|numeric'],
         ]);
         return $this->validation->withRequest($this->request)->run();

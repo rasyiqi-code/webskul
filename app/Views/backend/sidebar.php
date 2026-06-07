@@ -1,7 +1,7 @@
 <section class="sidebar">
 	<ul class="sidebar-menu" data-widget="tree">
 
-		<?php if (in_array('dashboard', __session('user_privileges'))) { ?>
+		<?php if (has_privilege('dashboard')) { ?>
 			<li <?=isset($dashboard) ? 'class="active"':''?>>
 				<a href="<?=site_url('dashboard');?>">
 					<i class="fa fa-dashboard"></i> <span>BERANDA</span>
@@ -16,7 +16,7 @@
 		</li>
 
 		<!-- @namespace Employee Menu -->
-		<?php if (filter_var(__session('is_employee'), FILTER_VALIDATE_BOOLEAN) && in_array('employee_profile', __session('user_privileges'))) { ?>
+		<?php if (filter_var(__session('is_employee'), FILTER_VALIDATE_BOOLEAN) && has_privilege('employee_profile')) { ?>
 			<li class="<?=isset($employee_profile) ? 'active':'';?>">
 				<a href="<?=site_url('employee_profile');?>">
 					<i class="fa fa-user"></i> <span>PROFIL</span>
@@ -44,7 +44,7 @@
 		<?php } ?>
 
 		<!-- @namespace Student Menu -->
-		<?php if (filter_var(__session('is_student'), FILTER_VALIDATE_BOOLEAN) && in_array('student_profile', __session('user_privileges'))) { ?>
+		<?php if (filter_var(__session('is_student'), FILTER_VALIDATE_BOOLEAN) && has_privilege('student_profile')) { ?>
 			<li class="<?=isset($scholarships) ? 'active':'';?>">
 				<a href="<?=site_url('scholarships');?>">
 					<i class="fa fa-money"></i> <span>BEASISWA</span>
@@ -76,7 +76,7 @@
 
 		<!-- @namespace Administrator Menu -->
 		<?php if (filter_var(__session('is_super_admin'), FILTER_VALIDATE_BOOLEAN) || filter_var(__session('is_admin'), FILTER_VALIDATE_BOOLEAN)) { ?>
-			<?php if (in_array('blog', __session('user_privileges'))) { ?>
+			<?php if (has_privilege('blog')) { ?>
 				<li class="treeview <?=isset($blog) ? 'active':'';?>">
 					<a href="#">
 						<i class="fa fa-edit"></i> <span>BLOG</span> <i class="fa fa-angle-left pull-right"></i>
@@ -105,7 +105,7 @@
 		<?php } ?>
 
 		<?php if (filter_var(__session('is_super_admin'), FILTER_VALIDATE_BOOLEAN) || filter_var(__session('is_admin'), FILTER_VALIDATE_BOOLEAN)) { ?>
-			<?php if (in_array('reference', __session('user_privileges'))) { ?>
+			<?php if (has_privilege('reference')) { ?>
 				<li class="treeview <?=isset($reference) ? 'active':'';?>">
 					<a href="#">
 						<i class="fa fa-list"></i> <span>DATA INDUK</span> <i class="fa fa-angle-left pull-right"></i>
@@ -122,7 +122,7 @@
 		<?php } ?>
 
 		<?php if (filter_var(__session('is_super_admin'), FILTER_VALIDATE_BOOLEAN) || filter_var(__session('is_admin'), FILTER_VALIDATE_BOOLEAN)) { ?>
-			<?php if (in_array('academic', __session('user_privileges'))) { ?>
+			<?php if (has_privilege('academic')) { ?>
 				<li class="treeview <?=isset($academic) ? 'active':'';?>">
 					<a href="#">
 						<i class="fa fa-address-book-o"></i> <span>AKADEMIK</span> <i class="fa fa-angle-left pull-right"></i>
@@ -183,7 +183,7 @@
 		<?php } ?>
 
 		<?php if (filter_var(__session('is_super_admin'), FILTER_VALIDATE_BOOLEAN) || filter_var(__session('is_admin'), FILTER_VALIDATE_BOOLEAN)) { ?>
-			<?php if (in_array('employees', __session('user_privileges'))) { ?>
+			<?php if (has_privilege('employees')) { ?>
 				<li class="treeview <?=isset($employees) ? 'active':'';?>">
 					<a href="#">
 						<i class="fa fa-address-book-o"></i> <span>GTK</span> <i class="fa fa-angle-left pull-right"></i>
@@ -199,7 +199,7 @@
 		<?php } ?>
 
 		<?php if (filter_var(__session('is_super_admin'), FILTER_VALIDATE_BOOLEAN) || filter_var(__session('is_admin'), FILTER_VALIDATE_BOOLEAN)) { ?>
-			<?php if (in_array('admission', __session('user_privileges'))) { ?>
+			<?php if (has_privilege('admission')) { ?>
 				<li class="treeview <?=isset($admission) ? 'active':'';?>">
 					<a href="#">
 						<i class="fa fa-address-book-o"></i> <span>PPDB <?=__session('admission_year')?> </span> <i class="fa fa-angle-left pull-right"></i>
@@ -232,7 +232,7 @@
 		<?php } ?>
 
 		<?php if (filter_var(__session('is_super_admin'), FILTER_VALIDATE_BOOLEAN) || filter_var(__session('is_admin'), FILTER_VALIDATE_BOOLEAN)) { ?>
-			<?php if (in_array('plugins', __session('user_privileges'))) { ?>
+			<?php if (has_privilege('plugins')) { ?>
 				<li class="treeview <?=isset($plugins) ? 'active':'';?>">
 					<a href="#">
 						<i class="fa fa-plug"></i> <span>PLUGINS</span> <i class="fa fa-angle-left pull-right"></i>
@@ -252,7 +252,7 @@
 		<?php } ?>
 
 		<?php if (filter_var(__session('is_super_admin'), FILTER_VALIDATE_BOOLEAN) || filter_var(__session('is_admin'), FILTER_VALIDATE_BOOLEAN)) { ?>
-			<?php if (in_array('media', __session('user_privileges'))) { ?>
+			<?php if (has_privilege('media')) { ?>
 				<li class="treeview <?=isset($media) ? 'active':'';?>">
 					<a href="#">
 						<i class="fa fa-camera"></i> <span>MEDIA</span> <i class="fa fa-angle-left pull-right"></i>
@@ -268,7 +268,7 @@
 		<?php } ?>
 
 		<?php if (filter_var(__session('is_super_admin'), FILTER_VALIDATE_BOOLEAN) || filter_var(__session('is_admin'), FILTER_VALIDATE_BOOLEAN)) { ?>
-			<?php if (in_array('appearance', __session('user_privileges'))) { ?>
+			<?php if (has_privilege('appearance')) { ?>
 				<li class="treeview <?=isset($appearance) ? 'active':'';?>">
 					<a href="#">
 						<i class="fa fa-paint-brush"></i> <span>TAMPILAN</span> <i class="fa fa-angle-left pull-right"></i>
@@ -282,7 +282,7 @@
 		<?php } ?>
 
 		<?php if (filter_var(__session('is_super_admin'), FILTER_VALIDATE_BOOLEAN) || filter_var(__session('is_admin'), FILTER_VALIDATE_BOOLEAN)) { ?>
-			<?php if (in_array('users', __session('user_privileges'))) { ?>
+			<?php if (has_privilege('users')) { ?>
 				<li class="treeview <?=isset($users) ? 'active':'';?>">
 					<a href="#">
 						<i class="fa fa-users"></i> <span>PENGGUNA</span> <i class="fa fa-angle-left pull-right"></i>
@@ -302,7 +302,7 @@
 		<?php } ?>
 
 		<?php if (filter_var(__session('is_super_admin'), FILTER_VALIDATE_BOOLEAN) || filter_var(__session('is_admin'), FILTER_VALIDATE_BOOLEAN)) { ?>
-			<?php if (in_array('settings', __session('user_privileges'))) { ?>
+			<?php if (has_privilege('settings')) { ?>
 				<li class="treeview <?=isset($settings) ? 'active':'';?>">
 					<a href="#">
 						<i class="fa fa-wrench"></i> <span>PENGATURAN</span> <i class="fa fa-angle-left pull-right"></i>
@@ -322,7 +322,7 @@
 		<?php } ?>
 
 		<?php if (filter_var(__session('is_super_admin'), FILTER_VALIDATE_BOOLEAN) || filter_var(__session('is_admin'), FILTER_VALIDATE_BOOLEAN)) { ?>
-			<?php if (in_array('maintenance', __session('user_privileges'))) { ?>
+			<?php if (has_privilege('maintenance')) { ?>
 				<li class="treeview">
 					<a href="#">
 						<i class="fa fa-medkit"></i> <span>PEMELIHARAAN</span> <i class="fa fa-angle-left pull-right"></i>

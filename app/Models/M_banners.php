@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use CodeIgniter\Model;
+use App\Models\BaseModel;
 
-class M_banners extends Model
+class M_banners extends BaseModel
 {
     protected $table = 'links';
     protected $primaryKey = 'id';

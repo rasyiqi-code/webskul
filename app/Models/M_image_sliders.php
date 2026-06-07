@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use CodeIgniter\Model;
+use App\Models\BaseModel;
 
-class M_image_sliders extends Model
+class M_image_sliders extends BaseModel
 {
     protected $table = 'image_sliders';
     protected $primaryKey = 'id';

@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use CodeIgniter\Model;
+use App\Models\BaseModel;
 
-class M_subject_setting_details extends Model
+class M_subject_setting_details extends BaseModel
 {
     protected $table = 'admission_subject_setting_details';
     protected $primaryKey = 'id';

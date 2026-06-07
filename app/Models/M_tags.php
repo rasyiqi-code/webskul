@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use CodeIgniter\Model;
+use App\Models\BaseModel;
 
-class M_tags extends Model
+class M_tags extends BaseModel
 {
     protected $table = 'tags';
     protected $primaryKey = 'id';

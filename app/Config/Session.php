@@ -8,7 +8,7 @@ use CodeIgniter\Session\Handlers\DatabaseHandler;
 class Session extends BaseConfig
 {
     public string $driver = 'CodeIgniter\Session\Handlers\DatabaseHandler';
-    public string $cookieName = '_sessions';
+    public string $cookieName = 'webskul_session';
     public int $expiration = 7200;
     public string $savePath = '_sessions';
     public bool $matchIP = false;

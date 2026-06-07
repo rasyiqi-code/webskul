@@ -1,4 +1,4 @@
-echo $this->include('backend/grid_index');?>
+<?php echo $this->include('backend/grid_index');?>
 <script type="text/javascript">
 DS.Majors = _H.StrToObject('<?=$major_dropdown;?>');
 DS.AcademicYears = _H.StrToObject('<?=$academic_year_dropdown;?>');

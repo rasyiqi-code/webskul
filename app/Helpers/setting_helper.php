@@ -7,7 +7,7 @@ if (!function_exists('general_settings')) {
             ['setting_group' => 'general', 'setting_variable' => 'site_maintenance_end_date', 'setting_default_value' => date('Y') . '-01-01', 'setting_access_group' => 'public', 'setting_description' => 'Tanggal Berakhir Pemeliharaan Situs'],
             ['setting_group' => 'general', 'setting_variable' => 'site_cache', 'setting_default_value' => 'false', 'setting_access_group' => 'public', 'setting_description' => 'Cache situs'],
             ['setting_group' => 'general', 'setting_variable' => 'site_cache_time', 'setting_default_value' => 10, 'setting_access_group' => 'public', 'setting_description' => 'Lama Cache Situs'],
-            ['setting_group' => 'general', 'setting_variable' => 'meta_description', 'setting_default_value' => 'CMS Sekolahku adalah Content Management System dan PPDB Online gratis untuk SD SMP/Sederajat SMA/Sederajat', 'setting_access_group' => 'public', 'setting_description' => 'Deskripsi Meta'],
+            ['setting_group' => 'general', 'setting_variable' => 'meta_description', 'setting_default_value' => 'Webskul adalah Content Management System dan PPDB Online gratis untuk SD SMP/Sederajat SMA/Sederajat', 'setting_access_group' => 'public', 'setting_description' => 'Deskripsi Meta'],
             ['setting_group' => 'general', 'setting_variable' => 'meta_keywords', 'setting_default_value' => 'CMS, Website Sekolah Gratis, Cara Membuat Website Sekolah, membuat web sekolah, contoh website sekolah, fitur website sekolah, Sekolah, Website, Internet,Situs, CMS Sekolah, Web Sekolah, Website Sekolah Gratis, Website Sekolah, Aplikasi Sekolah, PPDB Online, PSB Online, PSB Online Gratis, Penerimaan Siswa Baru Online, Raport Online, Kurikulum 2013, SD, SMP, SMA, Aliyah, MTs, SMK', 'setting_access_group' => 'public', 'setting_description' => 'Kata Kunci Meta'],
             ['setting_group' => 'general', 'setting_variable' => 'map_location', 'setting_default_value' => '', 'setting_access_group' => 'public', 'setting_description' => 'Lokasi di Google Maps'],
             ['setting_group' => 'general', 'setting_variable' => 'favicon', 'setting_default_value' => 'favicon.png', 'setting_access_group' => 'public', 'setting_description' => 'Favicon'],
@@ -87,11 +87,11 @@ if (!function_exists('discussion_settings')) {
 if (!function_exists('social_account_settings')) {
     function social_account_settings() {
         return [
-            ['setting_group' => 'social_account', 'setting_variable' => 'facebook', 'setting_default_value' => 'https://www.facebook.com/cmssekolahku/', 'setting_access_group' => 'public', 'setting_description' => 'Facebook'],
-            ['setting_group' => 'social_account', 'setting_variable' => 'twitter', 'setting_default_value' => 'https://twitter.com/antonsofyan', 'setting_access_group' => 'public', 'setting_description' => 'Twitter'],
-            ['setting_group' => 'social_account', 'setting_variable' => 'linked_in', 'setting_default_value' => 'https://www.linkedin.com/in/anton-sofyan-1428937a/', 'setting_access_group' => 'public', 'setting_description' => 'Linked In'],
+            ['setting_group' => 'social_account', 'setting_variable' => 'facebook', 'setting_default_value' => 'https://www.facebook.com/webskul/', 'setting_access_group' => 'public', 'setting_description' => 'Facebook'],
+            ['setting_group' => 'social_account', 'setting_variable' => 'twitter', 'setting_default_value' => 'https://twitter.com/rasyiqi', 'setting_access_group' => 'public', 'setting_description' => 'Twitter'],
+            ['setting_group' => 'social_account', 'setting_variable' => 'linked_in', 'setting_default_value' => 'https://www.linkedin.com/in/rasyiqi/', 'setting_access_group' => 'public', 'setting_description' => 'Linked In'],
             ['setting_group' => 'social_account', 'setting_variable' => 'youtube', 'setting_default_value' => '-', 'setting_access_group' => 'public', 'setting_description' => 'Youtube'],
-            ['setting_group' => 'social_account', 'setting_variable' => 'instagram', 'setting_default_value' => 'https://www.instagram.com/anton_sofyan/', 'setting_access_group' => 'public', 'setting_description' => 'Instagram'],
+            ['setting_group' => 'social_account', 'setting_variable' => 'instagram', 'setting_default_value' => 'https://www.instagram.com/rasyiqi/', 'setting_access_group' => 'public', 'setting_description' => 'Instagram'],
         ];
     }
 }
@@ -126,7 +126,7 @@ if (!function_exists('school_profile_settings')) {
         return [
             ['setting_group' => 'school_profile', 'setting_variable' => 'npsn', 'setting_default_value' => 123, 'setting_access_group' => 'public', 'setting_description' => 'NPSN'],
             ['setting_group' => 'school_profile', 'setting_variable' => 'school_name', 'setting_default_value' => 'SMK Negeri 10 Kuningan', 'setting_access_group' => 'public', 'setting_description' => 'Nama Sekolah'],
-            ['setting_group' => 'school_profile', 'setting_variable' => 'headmaster', 'setting_default_value' => 'Anton Sofyan', 'setting_access_group' => 'public', 'setting_description' => 'Kepala Sekolah'],
+            ['setting_group' => 'school_profile', 'setting_variable' => 'headmaster', 'setting_default_value' => 'Rasyiqi', 'setting_access_group' => 'public', 'setting_description' => 'Kepala Sekolah'],
             ['setting_group' => 'school_profile', 'setting_variable' => 'headmaster_photo', 'setting_default_value' => 'headmaster_photo.png', 'setting_access_group' => 'public', 'setting_description' => 'Foto Kepala Sekolah'],
             ['setting_group' => 'school_profile', 'setting_variable' => 'school_level', 'setting_default_value' => 3, 'setting_access_group' => 'public', 'setting_description' => 'Bentuk Pendidikan'],
             ['setting_group' => 'school_profile', 'setting_variable' => 'school_status', 'setting_default_value' => 1, 'setting_access_group' => 'public', 'setting_description' => 'Status Sekolah'],

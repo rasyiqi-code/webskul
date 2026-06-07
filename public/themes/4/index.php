@@ -14,12 +14,12 @@
 	<meta name="robots" content="index,follow" />
 	<meta name="revised" content="Sunday, July 18th, 2010, 5:15 pm" />
 	<meta name="Classification" content="Education">
-	<meta name="author" content="Anton Sofyan, 4ntonsofyan@gmail.com">
-	<meta name="designer" content="Anton Sofyan, 4ntonsofyan@gmail.com">
-	<meta name="reply-to" content="4ntonsofyan@gmail.com">
-	<meta name="owner" content="Anton Sofyan">
-	<meta name="url" content="https://www.sekolahku.web.id">
-	<meta name="identifier-URL" content="https://www.sekolahku.web.id">
+	<meta name="author" content="Rasyiqi, no-reply@webskul.web.id">
+	<meta name="designer" content="Rasyiqi, no-reply@webskul.web.id">
+	<meta name="reply-to" content="no-reply@webskul.web.id">
+	<meta name="owner" content="Rasyiqi">
+	<meta name="url" content="https://www.webskul.web.id">
+	<meta name="identifier-URL" content="https://www.webskul.web.id">
 	<meta name="category" content="Admission, Education">
 	<meta name="coverage" content="Worldwide">
 	<meta name="distribution" content="Global">
@@ -273,7 +273,7 @@
 						<?=copyright(2017, base_url(), __session('school_profile')['school_name'])?>
 					</div>
 					<div class="col-md-6 col-xs-12 text-md-right text-center text-uppercase">
-						Powered by <a href="http://sekolahku.web.id">sekolahku.web.id</a>
+						Powered by <a href="http://webskul.web.id">webskul.web.id</a>
 					</div>
 				</div>
 			</div>
