@@ -1,90 +1,137 @@
-<div class="col-lg-4 col-md-4 col-sm-12 sidebar">
-	<!-- Sambutan Kepala Sekolah  -->
+<div class="col-lg-4 col-md-5 col-sm-12 sidebar">
+	<!-- Sambutan Kepala Sekolah -->
 	<?php if ( ! in_array(service('uri')->getSegment(1), ['sambutan-kepala-sekolah', 'sambutan-rektor', 'sambutan-ketua', 'sambutan-direktur'])) { ?>
-		<div class="card rounded-0 border border-secondary mb-3">
-			<img src="<?=base_url('media_library/images/').__session('school_profile')['headmaster_photo'];?>" class="card-img-top rounded-0">
-			<div class="card-body">
-				<h5 class="card-title text-center text-uppercase"><?=__session('school_profile')['headmaster']?></h5>
-				<p class="card-text text-center mt-0 text-muted">- Kepala Sekolah -</p>
-				<p class="card-text text-justify"><?=word_limiter(strip_tags(get_opening_speech()), 20);?></p>
-			</div>
-			<div class="card-footer text-center">
-				<small class="text-muted text-uppercase"><a href="<?=site_url(opening_speech_route());?>">Selengkapnya</a></small>
-			</div>
-		</div>
-	<?php } ?>
-
-	<?php $links = get_links(); if ($links->getNumRows() > 0) { ?>
-		<h5 class="page-title mb-3 <?=!in_array(service('uri')->getSegment(1), ['sambutan-kepala-sekolah', 'sambutan-rektor', 'sambutan-ketua', 'sambutan-direktur']) ? 'mt-3' : ''?>">Tautan</h5>
-		<div class="list-group">
-			<?php foreach($links->getResult() as $row) { ?>
-				<a href="<?=$row->link_url?>" class="list-group-item list-group-item-action rounded-0" target="<?=$row->link_target?>"><?=$row->link_title?></a>
-			<?php } ?>
-		</div>
-	<?php } ?>
-
-	<?php $query = get_archives(date('Y')); if ($query->getNumRows() > 0) { ?>
-		<h5 class="page-title mt-3 mb-3">Arsip <?=date('Y')?></h5>
-		<?php foreach($query->getResult() as $row) { ?>
-			<a href="<?=site_url('arsip/'.date('Y').'/'.$row->code)?>" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center rounded-0 mb-1">
-				<?=bulan($row->code)?>
-				<small class="border border-secondary pt-1 pb-1 pr-2 pl-2"><?=$row->count?></small>
-			</a>
-		<?php } ?>
-	<?php } ?>
-
-	<!-- Paling Dikomentari -->
-	<?php $query = get_most_commented(5); if ($query->getNumRows() > 0) { ?>
-		<h5 class="page-title mt-3 mb-3">Paling Dikomentari</h5>
-		<div class="list-group mt-3 mb-3">
-			<?php foreach($query->getResult() as $row) { ?>
-				<a href="<?=site_url('read/'.$row->id.'/'.$row->post_slug)?>" class="list-group-item list-group-item-action rounded-0">
-					<div class="d-flex w-100 justify-content-between">
-						<h6 class="card-text font-weight-bold"><?=$row->post_title?></h6>
+		<div class="sidebar-widget widget-headmaster mb-4">
+			<div class="widget-headmaster-card shadow-sm-custom rounded-custom overflow-hidden bg-white border">
+				<div class="widget-headmaster-img-wrapper position-relative text-center pt-4 pb-2 bg-light-modern">
+					<img src="<?=base_url('media_library/images/').__session('school_profile')['headmaster_photo'];?>" class="widget-headmaster-photo rounded-circle shadow-sm" alt="<?=__session('school_profile')['headmaster']?>">
+					<div class="widget-headmaster-info mt-3 px-3">
+						<h6 class="font-weight-bold text-dark mb-1"><?=__session('school_profile')['headmaster']?></h6>
+						<span class="badge badge-accent text-uppercase">Kepala Sekolah</span>
 					</div>
-					<small class="text-muted"><?=date('d/m/Y H:i', strtotime($row->created_at))?> - Oleh <?=$row->post_author?> - Dilihat <?=$row->post_counter?> kali</small>
-				</a>
-			<?php } ?>
-		</div>
-	<?php } ?>
-
-	<?php $query = get_active_question(); if ($query) { ?>
-		<h5 class="page-title mt-3 mb-3">Jajak Pendapat</h5>
-		<div class="card rounded-0 border border-secondary mb-3">
-			<div class="card-body">
-				<p><?=$query->question?></p>
-				<?php $options = get_answers($query->id); foreach($options->getResult() as $option) { ?>
-					<div class="form-check">
-						<input class="form-check-input" type="radio" name="answer_id" id="answer_id_<?=$option->id?>" value="<?=$option->id?>">
-						<label class="form-check-label" for="answer_id_<?=$option->id?>"><?=$option->answer?></label>
-					</div>
-				<?php } ?>
-			</div>
-			<div class="card-footer">
-				<div class="btn-group">
-					<button type="button" name="button" onclick="vote(); return false;" class="btn btn-outline-dark rounded-0"><i class="fa fa-send"></i> Submit</button>
-					<a href="<?=site_url('hasil-jajak-pendapat')?>" class="btn btn-outline-dark rounded-0"><i class="fa fa-bar-chart"></i> Hasil</a>
+				</div>
+				<div class="card-body p-3 text-center">
+					<p class="card-text text-muted small speech-excerpt mb-3"><?=word_limiter(strip_tags(get_opening_speech()), 22);?></p>
+					<a href="<?=site_url(opening_speech_route());?>" class="btn btn-outline-primary-custom btn-sm btn-block">
+						Baca Sambutan Lengkap <i class="fa fa-arrow-right ml-1"></i>
+					</a>
 				</div>
 			</div>
 		</div>
 	<?php } ?>
 
-	<h5 class="page-title mt-3 mb-3">Berlangganan</h5>
-	<form class="card p-1 border border-secondary mt-2 mb-2 rounded-0">
-		<div class="input-group">
-			<input type="text" id="subscriber" onkeydown="if (event.keyCode == 13) { subscribe(); return false; }" class="form-control rounded-0 border border-secondary" placeholder="Email Address...">
-			<div class="input-group-append">
-				<button type="button" onclick="if (event.keyCode == 13) { subscribe(); return false; }" class="btn btn-success rounded-0"><i class="fa fa-envelope"></i></button>
+	<!-- Tautan Terkait -->
+	<?php $links = get_links(); if ($links->getNumRows() > 0) { ?>
+		<div class="sidebar-widget widget-links mb-4">
+			<h6 class="widget-title"><span><i class="fa fa-external-link text-primary mr-2"></i> Tautan Penting</span></h6>
+			<div class="widget-card bg-white rounded-custom shadow-sm-custom border p-2">
+				<div class="list-group list-group-flush">
+					<?php foreach($links->getResult() as $row) { ?>
+						<a href="<?=$row->link_url?>" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center py-2 px-3 border-0 rounded-sm" target="<?=$row->link_target?>">
+							<span><i class="fa fa-angle-right text-muted mr-2"></i> <?=$row->link_title?></span>
+							<i class="fa fa-share text-light-muted small"></i>
+						</a>
+					<?php } ?>
+				</div>
 			</div>
 		</div>
-	</form>
+	<?php } ?>
 
-	<!--  Banner -->
+	<!-- Arsip Tulisan -->
+	<?php $query = get_archives(date('Y')); if ($query->getNumRows() > 0) { ?>
+		<div class="sidebar-widget widget-archives mb-4">
+			<h6 class="widget-title"><span><i class="fa fa-archive text-primary mr-2"></i> Arsip <?=date('Y')?></span></h6>
+			<div class="widget-card bg-white rounded-custom shadow-sm-custom border p-2">
+				<div class="list-group list-group-flush">
+					<?php foreach($query->getResult() as $row) { ?>
+						<a href="<?=site_url('arsip/'.date('Y').'/'.$row->code)?>" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center py-2 px-3 border-0 rounded-sm">
+							<span><i class="fa fa-calendar-o text-muted mr-2"></i> <?=bulan($row->code)?></span>
+							<span class="badge badge-pill badge-light-custom font-weight-bold"><?=$row->count?></span>
+						</a>
+					<?php } ?>
+				</div>
+			</div>
+		</div>
+	<?php } ?>
+
+	<!-- Paling Dikomentari -->
+	<?php $query = get_most_commented(5); if ($query->getNumRows() > 0) { ?>
+		<div class="sidebar-widget widget-popular mb-4">
+			<h6 class="widget-title"><span><i class="fa fa-comments-o text-primary mr-2"></i> Paling Populer</span></h6>
+			<div class="widget-card bg-white rounded-custom shadow-sm-custom border p-3">
+				<?php foreach($query->getResult() as $row) { ?>
+					<div class="popular-post-item mb-3 pb-3 border-bottom-light">
+						<h6 class="font-weight-bold mb-1 line-clamp-2">
+							<a href="<?=site_url('read/'.$row->id.'/'.$row->post_slug)?>" class="text-dark hover-primary">
+								<?=$row->post_title?>
+							</a>
+						</h6>
+						<div class="popular-meta text-muted small d-flex align-items-center">
+							<span class="mr-3"><i class="fa fa-clock-o mr-1"></i> <?=date('d M Y', strtotime($row->created_at))?></span>
+							<span><i class="fa fa-eye mr-1"></i> <?=$row->post_counter?> tayang</span>
+						</div>
+					</div>
+				<?php } ?>
+			</div>
+		</div>
+	<?php } ?>
+
+	<!-- Jajak Pendapat (Polling) -->
+	<?php $query = get_active_question(); if ($query) { ?>
+		<div class="sidebar-widget widget-polling mb-4">
+			<h6 class="widget-title"><span><i class="fa fa-bar-chart text-primary mr-2"></i> Jajak Pendapat</span></h6>
+			<div class="widget-card bg-white rounded-custom shadow-sm-custom border p-3">
+				<p class="font-weight-bold text-dark mb-3 small"><?=$query->question?></p>
+				<form id="sidebar-poll-form" class="mb-3">
+					<?php $options = get_answers($query->id); foreach($options->getResult() as $option) { ?>
+						<div class="custom-control custom-radio mb-2">
+							<input class="custom-control-input" type="radio" name="answer_id" id="sb_answer_id_<?=$option->id?>" value="<?=$option->id?>">
+							<label class="custom-control-label small text-muted" for="sb_answer_id_<?=$option->id?>"><?=$option->answer?></label>
+						</div>
+					<?php } ?>
+				</form>
+				<div class="d-flex justify-content-between align-items-center pt-2 border-top">
+					<button type="button" onclick="vote(); return false;" class="btn btn-primary-gradient btn-sm px-3">
+						<i class="fa fa-paper-plane mr-1"></i> Pilih
+					</button>
+					<a href="<?=site_url('hasil-jajak-pendapat')?>" class="btn btn-link btn-sm text-muted">
+						<i class="fa fa-pie-chart mr-1"></i> Hasil
+					</a>
+				</div>
+			</div>
+		</div>
+	<?php } ?>
+
+	<!-- Berlangganan (Newsletter) -->
+	<div class="sidebar-widget widget-newsletter mb-4">
+		<h6 class="widget-title"><span><i class="fa fa-envelope-o text-primary mr-2"></i> Buletin Berita</span></h6>
+		<div class="widget-card bg-white rounded-custom shadow-sm-custom border p-3">
+			<p class="small text-muted mb-3">Dapatkan kabar dan agenda pendidikan terbaru langsung ke email Anda.</p>
+			<div class="input-group">
+				<input type="email" id="subscriber" onkeydown="if (event.keyCode == 13) { subscribe(); return false; }" class="form-control form-control-sm rounded-custom-left border" placeholder="Email Anda...">
+				<div class="input-group-append">
+					<button type="button" onclick="subscribe();" class="btn btn-primary-gradient btn-sm px-3 rounded-custom-right">
+						<i class="fa fa-send"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Banner Iklan / Info Grafis -->
 	<?php $query = get_banners(); if ($query->getNumRows() > 0) { ?>
-		<h5 class="page-title mt-3 mb-3">Iklan</h5>
-		<?php foreach($query->getResult() as $row) { ?>
-			<a href="<?=$row->link_url?>" title="<?=$row->link_title?>"><img src="<?=base_url('media_library/banners/'.$row->link_image)?>" class="img-fluid mb-2 w-100" alt="<?=$row->link_title?>"></a>
-		<?php } ?>
+		<div class="sidebar-widget widget-banners mb-4">
+			<h6 class="widget-title"><span><i class="fa fa-bullhorn text-primary mr-2"></i> Informasi Penting</span></h6>
+			<div class="banner-list">
+				<?php foreach($query->getResult() as $row) { ?>
+					<div class="banner-card rounded-custom overflow-hidden shadow-sm-custom mb-3 border">
+						<a href="<?=$row->link_url?>" title="<?=$row->link_title?>" target="_blank">
+							<img src="<?=base_url('media_library/banners/'.$row->link_image)?>" class="img-fluid w-100 banner-img" alt="<?=$row->link_title?>">
+						</a>
+					</div>
+				<?php } ?>
+			</div>
+		</div>
 	<?php } ?>
 </div>
 <!-- /CONTENT -->

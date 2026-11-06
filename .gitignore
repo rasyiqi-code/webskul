@@ -131,3 +131,7 @@ _modules/*
 
 # Dump Database SQL
 /*.sql
+
+# Public Sessions / Null
+/public/null/
+

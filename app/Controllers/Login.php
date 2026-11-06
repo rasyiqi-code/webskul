@@ -45,7 +45,7 @@ class Login extends BaseController
                 $this->vars['ip_banned'] = $auth->ipBanned($ip_address);
             } else {
                 $this->vars['status']    = 'error';
-                $this->vars['message']  = $this->validator->getErrors();
+                $this->vars['message']  = $this->validation->getErrors();
                 $this->vars['ip_banned'] = false;
             }
 

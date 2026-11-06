@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
 	<title><?=isset($page_title) ? $page_title . ' | ' : ''?><?=__session('school_profile')['school_name']?></title>
 	<meta charset="utf-8" />
@@ -12,33 +12,16 @@
 	<meta name="copyright" content="<?=__session('school_profile')['school_name']?>">
 	<meta name="language" content="Indonesia">
 	<meta name="robots" content="index,follow" />
-	<meta name="revised" content="Sunday, July 18th, 2010, 5:15 pm" />
-	<meta name="Classification" content="Education">
-	<meta name="author" content="Rasyiqi, no-reply@webskul.web.id">
-	<meta name="designer" content="Rasyiqi, no-reply@webskul.web.id">
-	<meta name="reply-to" content="no-reply@webskul.web.id">
-	<meta name="owner" content="Rasyiqi">
-	<meta name="url" content="https://www.webskul.web.id">
-	<meta name="identifier-URL" content="https://www.webskul.web.id">
+	<meta name="author" content="Webskul">
 	<meta name="category" content="Admission, Education">
 	<meta name="coverage" content="Worldwide">
 	<meta name="distribution" content="Global">
 	<meta name="rating" content="General">
-	<meta name="revisit-after" content="7 days">
-	<meta http-equiv="Expires" content="0">
-	<meta http-equiv="Pragma" content="no-cache">
-	<meta http-equiv="Cache-Control" content="no-cache">
-	<meta http-equiv="Copyright" content="<?=__session('school_profile')['school_name'];?>" />
-	<meta http-equiv="imagetoolbar" content="no" />
-	<meta name="revisit-after" content="7" />
-	<meta name="webcrawlers" content="all" />
-	<meta name="rating" content="general" />
-	<meta name="spiders" content="all" />
 	<meta itemprop="name" content="<?=__session('school_profile')['school_name'];?>" />
 	<meta itemprop="description" content="<?=__session('general')['meta_description'];?>" />
 	<meta itemprop="image" content="<?=base_url('media_library/images/'. __session('school_profile')['logo']);?>" />
 	<meta name="csrf-token" content="<?=__session('csrf_token')?>">
-	<?php if (isset($post_type) && $post_type == 'post') { ?>
+	<?php if (isset($post_type) && $post_type == 'post' && isset($query)) { ?>
 		<meta property="og:url" content="<?=current_url()?>" />
 		<meta property="og:type" content="article" />
 		<meta property="og:title" content="<?=$query->post_title?>" />
@@ -47,7 +30,12 @@
 	<?php } ?>
 	<link rel="icon" href="<?=base_url('media_library/images/'.__session('general')['favicon']);?>">
 	<link rel="alternate" type="application/rss+xml" title="<?=__session('school_profile')['school_name'];?> Feed" href="<?=base_url('feed')?>" />
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	
+	<!-- Google Fonts: Plus Jakarta Sans & Inter -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	
 	<?=link_tag('assets/plugins/bootstrap-4/bootstrap.min.css')?>
 	<?=link_tag('assets/css/font-awesome.min.css')?>
 	<?=link_tag('assets/plugins/toastr/toastr.css')?>
@@ -58,6 +46,7 @@
 	<?=link_tag('assets/plugins/magnific-popup/magnific-popup.css')?>
 	<?=link_tag('assets/css/loading.css')?>
 	<?=link_tag('themes/1/style.css')?>
+	
 	<script type="text/javascript">
 	const _BASE_URL = '<?=base_url();?>';
 	const _CURRENT_URL = '<?=current_url();?>';
@@ -78,18 +67,18 @@
 	<?php } ?>
 </head>
 <body>
-	<noscript>You need to enable javaScript to run this App!!!</noscript>
+	<noscript>You need to enable JavaScript to run this App!</noscript>
 
 	<!-- Top Contact Bar -->
 	<div class="top-bar">
 		<div class="container d-flex justify-content-between align-items-center">
-			<div class="top-bar-info">
+			<div class="top-bar-info d-flex align-items-center">
 				<span class="mr-4"><i class="fa fa-phone"></i> <?=__session('school_profile')['phone']?></span>
-				<span class="mr-4 d-none d-md-inline"><i class="fa fa-envelope"></i> <?=__session('school_profile')['email']?></span>
+				<span class="mr-4 d-none d-md-inline"><i class="fa fa-envelope-o"></i> <?=__session('school_profile')['email']?></span>
 			</div>
-			<div class="top-bar-links">
-				<a href="<?=site_url('feed')?>" class="mr-3"><i class="fa fa-rss"></i> RSS</a>
-				<a href="#search_form"><i class="fa fa-search"></i> Cari</a>
+			<div class="top-bar-links d-flex align-items-center">
+				<a href="<?=site_url('feed')?>" class="mr-3 top-bar-link"><i class="fa fa-rss"></i> <span class="d-none d-sm-inline">RSS</span></a>
+				<a href="#search_form" class="top-bar-link"><i class="fa fa-search"></i> <span class="d-none d-sm-inline">Cari</span></a>
 			</div>
 		</div>
 	</div>
@@ -98,19 +87,21 @@
 	<header class="main-header" data-toggle="sticky-menu">
 		<div class="container">
 			<nav class="navbar navbar-expand-lg px-0">
-				<a class="navbar-brand d-flex align-items-center py-0" href="<?=base_url()?>">
-					<img src="<?=base_url('media_library/images/' . __session('school_profile')['logo'])?>" width="45" height="45" class="mr-3" style="object-fit:contain">
+				<a class="navbar-brand d-flex align-items-center py-2" href="<?=base_url()?>">
+					<div class="brand-logo-box mr-3">
+						<img src="<?=base_url('media_library/images/' . __session('school_profile')['logo'])?>" width="46" height="46" alt="Logo" class="brand-logo-img">
+					</div>
 					<div class="brand-text">
 						<div class="brand-name"><?=strtoupper(__session('school_profile')['school_name'])?></div>
 						<small class="brand-tagline"><?=__session('school_profile')['tagline']?></small>
 					</div>
 				</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNavDropdown">
 					<ul id="main-menu" class="sm sm-clean">
-						<li><a href="<?=base_url()?>"><i class="fa fa-home"></i></a></li>
+						<li><a href="<?=base_url()?>" title="Beranda"><i class="fa fa-home"></i></a></li>
 						<?php
 						$menus = get_menus();
 						foreach ($menus as $menu) {
@@ -145,10 +136,10 @@
 
 	<!-- Footer -->
 	<footer class="site-footer-modern">
-		<div class="container pt-5 pb-3 text-center">
+		<div class="container pt-5 pb-4 text-center">
 			<!-- Logo & Identitas Sekolah -->
 			<div class="footer-brand-centered mb-4">
-				<img src="<?=base_url('media_library/images/' . __session('school_profile')['logo'])?>" width="54" height="54" class="mb-3 footer-logo-img" alt="Logo School">
+				<img src="<?=base_url('media_library/images/' . __session('school_profile')['logo'])?>" width="58" height="58" class="mb-3 footer-logo-img" alt="Logo Sekolah">
 				<h4 class="footer-school-name font-weight-bold text-white mb-1"><?=__session('school_profile')['school_name']?></h4>
 				<p class="footer-school-tagline text-muted small mb-0"><?=__session('school_profile')['tagline']?></p>
 			</div>
@@ -176,16 +167,16 @@
 			<!-- Sosial Media Monokrom Minimalis -->
 			<div class="footer-social-mono d-flex justify-content-center mb-4">
 				<?php if (NULL !== __session('social_account')['facebook'] && __session('social_account')['facebook']) { ?>
-					<a href="<?=__session('social_account')['facebook']?>" title="Facebook" class="social-icon-mono"><i class="fa fa-facebook"></i></a>
+					<a href="<?=__session('social_account')['facebook']?>" title="Facebook" class="social-icon-mono" target="_blank"><i class="fa fa-facebook"></i></a>
 				<?php } ?>
 				<?php if (NULL !== __session('social_account')['twitter'] && __session('social_account')['twitter']) { ?>
-					<a href="<?=__session('social_account')['twitter']?>" title="Twitter" class="social-icon-mono"><i class="fa fa-twitter"></i></a>
+					<a href="<?=__session('social_account')['twitter']?>" title="Twitter" class="social-icon-mono" target="_blank"><i class="fa fa-twitter"></i></a>
 				<?php } ?>
 				<?php if (NULL !== __session('social_account')['instagram'] && __session('social_account')['instagram']) { ?>
-					<a href="<?=__session('social_account')['instagram']?>" title="Instagram" class="social-icon-mono"><i class="fa fa-instagram"></i></a>
+					<a href="<?=__session('social_account')['instagram']?>" title="Instagram" class="social-icon-mono" target="_blank"><i class="fa fa-instagram"></i></a>
 				<?php } ?>
 				<?php if (NULL !== __session('social_account')['youtube'] && __session('social_account')['youtube']) { ?>
-					<a href="<?=__session('social_account')['youtube']?>" title="Youtube" class="social-icon-mono"><i class="fa fa-youtube-play"></i></a>
+					<a href="<?=__session('social_account')['youtube']?>" title="Youtube" class="social-icon-mono" target="_blank"><i class="fa fa-youtube-play"></i></a>
 				<?php } ?>
 			</div>
 
@@ -197,7 +188,7 @@
 					<?=copyright(2017, base_url(), __session('school_profile')['school_name'])?>
 				</div>
 				<div class="powered-by-text">
-					Powered by <a href="http://webskul.web.id" target="_blank" class="text-muted">webskul.web.id</a>
+					Portal Manajemen Sekolah Modern &bull; <a href="http://webskul.web.id" target="_blank" class="text-muted hover-white">Webskul</a>
 				</div>
 			</div>
 		</div>
@@ -205,13 +196,18 @@
 
 	<!-- Search Overlay -->
 	<div id="search_form">
+		<button type="button" class="close text-white search-overlay-close-btn" aria-label="Close" onclick="$('#search_form').removeClass('open');">&times;</button>
 		<form action="<?=site_url('hasil-pencarian')?>" method="POST">
-			<input type="search_form" name="keyword" autocomplete="off" placeholder="Masukan kata kunci pencarian" />
-			<button type="submit" class="btn btn-lg btn-outline-light"><i class="fa fa-search"></i> CARI</button>
+			<div class="search-input-wrapper position-relative">
+				<input type="search_form" name="keyword" autocomplete="off" placeholder="Ketik kata kunci pencarian..." />
+				<button type="submit" class="btn btn-search-overlay-submit"><i class="fa fa-search mr-2"></i> CARI</button>
+			</div>
 		</form>
 	</div>
 
-	<a href="javascript:" id="return-to-top"><i class="fa fa-angle-double-up"></i></a>
+	<!-- Return to Top Floating Button -->
+	<a href="javascript:" id="return-to-top" title="Kembali ke atas"><i class="fa fa-chevron-up"></i></a>
+
 	<script>
 	$(function() {
 		var t = $('#main-menu');

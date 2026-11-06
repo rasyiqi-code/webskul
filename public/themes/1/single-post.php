@@ -19,16 +19,16 @@ function get_post_comments() {
 			var str = '';
 			for (var z in rows) {
 				var row = rows[ z ];
-				str += '<div class="card rounded-0 border border-secondary mb-3 post-comments">';
-				str += '<div class="card-body">';
-				str += row.comment_content;
+				str += '<div class="comment-item bg-white rounded-custom border p-3 mb-3 shadow-sm-custom post-comments">';
+				str += '<div class="d-flex justify-content-between align-items-center mb-2">';
+				str += '<div class="d-flex align-items-center">';
+				str += '<div class="comment-avatar mr-2"><i class="fa fa-user-circle-o fa-2x text-primary"></i></div>';
+				str += '<strong class="text-dark">' + row.comment_author + '</strong>';
 				str += '</div>';
-				str += '<div class="card-footer">';
-				str += '<small class="text-muted float-right">';
-				str += row.created_at.substr(8, 2) + '/' + row.created_at.substr(5, 2) + '/' + row.created_at.substr(0, 4);
-				str += ' ' + row.created_at.substr(11, 5);
-				str += ' - ' + row.comment_author;
-				str += '</small>';
+				str += '<small class="text-muted"><i class="fa fa-clock-o mr-1"></i>' + row.created_at.substr(8, 2) + '/' + row.created_at.substr(5, 2) + '/' + row.created_at.substr(0, 4) + ' ' + row.created_at.substr(11, 5) + '</small>';
+				str += '</div>';
+				str += '<div class="comment-body text-muted small pl-4 ml-2 border-left">';
+				str += row.comment_content;
 				str += '</div>';
 				str += '</div>';
 			}
@@ -39,119 +39,180 @@ function get_post_comments() {
 	}
 }
 </script>
-<!-- CONTENT -->
-<div class="col-lg-8 col-md-8 col-sm-12 ">
-	<div class="card rounded-0 border border-secondary mb-3">
-		<?php if ($post_type == 'post' && file_exists('./media_library/posts/large/'.$query->post_image)) { ?>
-			<img src="<?=base_url('media_library/posts/large/'.$query->post_image)?>" class="card-img-top rounded-0 w-100">
-		<?php } ?>
-		<div class="card-body">
-			<h4 class="card-title"><?=$query->post_title?></h4>
-			<p class="card-text"><?=$query->post_content?></p>
-		</div>
-		<div class="card-footer">
-			<small class="text-muted float-right"><?=date('d/m/Y H:i', strtotime($query->created_at))?> - Oleh <?=$post_author?> - Dilihat <?=$post_counter?> kali</small>
-		</div>
-	</div>
 
-	<!--  Komentar-->
-	<?php if ($post_comments->getNumRows() > 0) { ?>
-		<h5 class="page-title mt-3 mb-3">Komentar</h5>
-		<?php foreach($post_comments->getResult() as $row) { ?>
-			<div class="card rounded-0 border border-secondary mb-3 post-comments">
-				<div class="card-body">
-					<p class="card-text"><?=strip_tags($row->comment_content)?></p>
-				</div>
-				<div class="card-footer">
-					<small class="text-muted float-right"><?=date('d/m/Y H:i', strtotime($row->created_at))?> - <?=$row->comment_author?></small>
+<!-- CONTENT -->
+<div class="col-lg-8 col-md-7 col-sm-12">
+	<!-- Detail Artikel Utama -->
+	<article class="article-detail-card bg-white rounded-custom shadow-sm-custom border overflow-hidden mb-4">
+		<?php if ($post_type == 'post' && file_exists('./media_library/posts/large/'.$query->post_image)) { ?>
+			<div class="article-hero-image-wrapper">
+				<img src="<?=base_url('media_library/posts/large/'.$query->post_image)?>" class="img-fluid w-100 article-hero-img" alt="<?=$query->post_title?>">
+			</div>
+		<?php } ?>
+		
+		<div class="article-detail-body p-4 p-md-5">
+			<div class="article-meta-modern d-flex flex-wrap align-items-center text-muted small mb-3">
+				<span class="mr-3 mb-2"><i class="fa fa-calendar-check-o text-primary mr-1"></i> <?=indo_date(date('Y-m-d', strtotime($query->created_at)))?></span>
+				<span class="mr-3 mb-2"><i class="fa fa-user text-primary mr-1"></i> Oleh: <strong><?=$post_author?></strong></span>
+				<span class="mb-2"><i class="fa fa-eye text-primary mr-1"></i> Dilihat <strong><?=$post_counter?></strong> kali</span>
+			</div>
+
+			<h1 class="article-main-title font-weight-bold text-dark mb-4">
+				<?=$query->post_title?>
+			</h1>
+
+			<div class="article-rich-content text-justify">
+				<?=$query->post_content?>
+			</div>
+
+			<!-- Share Buttons -->
+			<div class="article-share-bar mt-5 pt-4 border-top d-flex flex-wrap align-items-center justify-content-between">
+				<span class="font-weight-bold text-dark small mb-2 mb-md-0"><i class="fa fa-share-alt mr-2 text-primary"></i> Bagikan Artikel:</span>
+				<div class="share-buttons-group">
+					<a href="https://www.facebook.com/sharer/sharer.php?u=<?=current_url()?>" target="_blank" class="btn btn-sm btn-outline-primary-custom mr-1"><i class="fa fa-facebook"></i> Facebook</a>
+					<a href="https://twitter.com/intent/tweet?url=<?=current_url()?>&text=<?=urlencode($query->post_title)?>" target="_blank" class="btn btn-sm btn-outline-primary-custom mr-1"><i class="fa fa-twitter"></i> Twitter</a>
+					<a href="https://api.whatsapp.com/send?text=<?=urlencode($query->post_title.' - '.current_url())?>" target="_blank" class="btn btn-sm btn-outline-primary-custom"><i class="fa fa-whatsapp"></i> WhatsApp</a>
 				</div>
 			</div>
-			<?php if (! empty($row->comment_reply)) { ?>
-				<div class="card rounded-0 border border-secondary mb-3 post-comments ml-5">
-					<div class="card-body">
-						<p class="card-text"><?=strip_tags($row->comment_reply)?></p>
+		</div>
+	</article>
+
+	<!-- Bagian Komentar -->
+	<?php if ($post_comments->getNumRows() > 0) { ?>
+		<div class="article-comments-section mb-4">
+			<h5 class="section-title-modern mb-3 font-weight-bold">
+				<i class="fa fa-comments text-primary mr-2"></i> Komentar Pengunjung (<?=$post_comments->getNumRows()?>)
+			</h5>
+			
+			<div class="comments-list">
+				<?php foreach($post_comments->getResult() as $row) { ?>
+					<div class="comment-item bg-white rounded-custom border p-3 mb-3 shadow-sm-custom post-comments">
+						<div class="d-flex justify-content-between align-items-center mb-2">
+							<div class="d-flex align-items-center">
+								<div class="comment-avatar mr-2"><i class="fa fa-user-circle text-primary" style="font-size: 28px;"></i></div>
+								<strong class="text-dark"><?=$row->comment_author?></strong>
+							</div>
+							<small class="text-muted"><i class="fa fa-clock-o mr-1"></i><?=date('d/m/Y H:i', strtotime($row->created_at))?></small>
+						</div>
+						<div class="comment-body text-muted small pl-4 ml-2 border-left">
+							<?=strip_tags($row->comment_content)?>
+						</div>
 					</div>
-					<div class="card-footer">
-						<small class="text-muted float-right">Administrator</small>
-					</div>
-				</div>
-			<?php } ?>
-		<?php } ?>
-		<div class="justify-content-between align-items-center float-right mb-3 w-100 more-comments">
-			<button type="button" onclick="get_post_comments()" class="btn btn-success rounded-0 float-right"><i class="fa fa-refresh"></i> Komentar Lainnya</button>
+					
+					<?php if (! empty($row->comment_reply)) { ?>
+						<div class="comment-reply-item bg-light-modern rounded-custom border p-3 mb-3 ml-4 ml-md-5 shadow-sm-custom">
+							<div class="d-flex justify-content-between align-items-center mb-2">
+								<div class="d-flex align-items-center">
+									<i class="fa fa-shield text-accent mr-2" style="font-size: 20px;"></i>
+									<strong class="text-dark">Administrator</strong>
+									<span class="badge badge-accent ml-2">Official</span>
+								</div>
+							</div>
+							<div class="comment-body text-muted small pl-4 ml-2 border-left">
+								<?=strip_tags($row->comment_reply)?>
+							</div>
+						</div>
+					<?php } ?>
+				<?php } ?>
+			</div>
+
+			<div class="text-center my-3 more-comments">
+				<button type="button" onclick="get_post_comments()" class="btn btn-outline-primary-custom btn-sm px-4">
+					<i class="fa fa-refresh mr-1"></i> Tampilkan Komentar Lainnya
+				</button>
+			</div>
 		</div>
 	<?php } ?>
 
-	<!-- Form Comment -->
+	<!-- Form Komentar -->
 	<?php if (
 		(
 			$query->post_comment_status == 'open' &&
 			filter_var(__session((string) 'comment_registration'), FILTER_VALIDATE_BOOLEAN) &&
 			session('active')
-			) ||
-			(
-				$query->post_comment_status == 'open' &&
-				__session('discussion')['comment_registration'] == 'false'
-				)
-			) { ?>
-				<h5 class="page-title mt-3 mb-3">Komentari Tulisan Ini</h5>
-				<div class="card rounded-0 border border-secondary mb-3">
-					<div class="card-body">
-						<div class="form-group row mb-2">
-							<label for="comment_author" class="col-sm-3 control-label">Nama Lengkap <span style="color: red">*</span></label>
-							<div class="col-sm-9">
-								<input type="text" class="form-control form-control-sm rounded-0 border border-secondary" id="comment_author" name="comment_author">
-							</div>
-						</div>
-						<div class="form-group row mb-2">
-							<label for="comment_email" class="col-sm-3 control-label">Email <span style="color: red">*</span></label>
-							<div class="col-sm-9">
-								<input type="text" class="form-control form-control-sm rounded-0 border border-secondary" id="comment_email" name="comment_email">
-							</div>
-						</div>
-						<div class="form-group row mb-2">
-							<label for="comment_url" class="col-sm-3 control-label">URL</label>
-							<div class="col-sm-9">
-								<input type="text" class="form-control form-control-sm rounded-0 border border-secondary" id="comment_url" name="comment_url">
-							</div>
-						</div>
-						<div class="form-group row mb-2">
-							<label for="comment_content" class="col-sm-3 control-label">Komentar <span style="color: red">*</span></label>
-							<div class="col-sm-9">
-								<textarea name="name" class="form-control form-control-sm rounded-0 border border-secondary" id="comment_content" rows="4"></textarea>
-							</div>
-						</div>
-						<?php if (NULL !== __session('general')['recaptcha_status'] && __session('general')['recaptcha_status'] == 'enable') { ?>
-							<input type="hidden" class="g-recaptcha-response" name="g-recaptcha-response">
-						<?php } ?>
-					</div>
-					<div class="card-footer">
-						<div class="form-group row mb-0">
-							<div class="offset-sm-3 col-sm-9">
-								<input type="hidden" name="comment_post_id" id="comment_post_id" value="<?=service('uri')->getSegment(2)?>">
-								<button type="button" onclick="post_comments(); return false;" class="btn btn-success rounded-0"><i class="fa fa-send"></i> Submit</button>
-							</div>
-						</div>
+		) ||
+		(
+			$query->post_comment_status == 'open' &&
+			__session('discussion')['comment_registration'] == 'false'
+		)
+	) { ?>
+		<div class="comment-form-section bg-white rounded-custom shadow-sm-custom border p-4 mb-4">
+			<h5 class="font-weight-bold text-dark mb-3">
+				<i class="fa fa-pencil-square-o text-primary mr-2"></i> Tinggalkan Komentar
+			</h5>
+			<p class="small text-muted mb-4">Alamat email Anda tidak akan dipublikasikan. Ruas yang wajib ditandai <span class="text-danger">*</span></p>
+			
+			<form>
+				<div class="form-group row">
+					<label for="comment_author" class="col-sm-3 col-form-label font-weight-bold small">Nama Lengkap <span class="text-danger">*</span></label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control rounded-custom border" id="comment_author" name="comment_author" placeholder="Nama Anda...">
 					</div>
 				</div>
-			<?php } ?>
+				<div class="form-group row">
+					<label for="comment_email" class="col-sm-3 col-form-label font-weight-bold small">Alamat Email <span class="text-danger">*</span></label>
+					<div class="col-sm-9">
+						<input type="email" class="form-control rounded-custom border" id="comment_email" name="comment_email" placeholder="email@domain.com">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="comment_url" class="col-sm-3 col-form-label font-weight-bold small">Website/URL</label>
+					<div class="col-sm-9">
+						<input type="url" class="form-control rounded-custom border" id="comment_url" name="comment_url" placeholder="https://...">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="comment_content" class="col-sm-3 col-form-label font-weight-bold small">Komentar <span class="text-danger">*</span></label>
+					<div class="col-sm-9">
+						<textarea name="comment_content" class="form-control rounded-custom border" id="comment_content" rows="4" placeholder="Tuliskan komentar atau pertanyaan Anda..."></textarea>
+					</div>
+				</div>
+				<?php if (NULL !== __session('general')['recaptcha_status'] && __session('general')['recaptcha_status'] == 'enable') { ?>
+					<input type="hidden" class="g-recaptcha-response" name="g-recaptcha-response">
+				<?php } ?>
+				<div class="form-group row mb-0">
+					<div class="offset-sm-3 col-sm-9">
+						<input type="hidden" name="comment_post_id" id="comment_post_id" value="<?=service('uri')->getSegment(2)?>">
+						<button type="button" onclick="post_comments(); return false;" class="btn btn-primary-gradient px-4">
+							<i class="fa fa-paper-plane mr-2"></i> Kirim Komentar
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	<?php } ?>
 
-			<!-- Get Anther Posts -->
-			<?php $query = $post_type == 'post' ? get_related_posts($query->post_categories, _toInteger(service('uri')->getSegment(2))) : get_another_pages(_toInteger(service('uri')->getSegment(2)), 5); if ($query->getNumRows() > 0) { ?>
-				<h5 class="page-title mt-3 mb-3"><?=$post_type == 'post' ? 'Tulisan':'Halaman'?> Lainnya</h5>
-				<?php foreach($query->getResult() as $row) { ?>
-					<div class="card rounded-0 border border-secondary mb-3">
-						<div class="card-body p-3">
-							<h5 class="card-title"><a href="<?=site_url('read/'.$row->id.'/'.$row->post_slug)?>"><?=$row->post_title?></a></h5>
-							<p class="card-text mb-0"><?=substr(strip_tags($row->post_content), 0, 185)?></p>
-							<div class="d-flex justify-content-between align-items-center mt-1">
-								<small class="text-muted"><?=date('d/m/Y H:i', strtotime($row->created_at))?> - Oleh <?=$row->post_author?> - Dilihat <?=$row->post_counter?> kali</small>
-								<a href="<?=site_url('read/'.$row->id.'/'.$row->post_slug)?>" class="btn btn-sm btn-success rounded-0"><i class="fa fa-search"></i></a>
+	<!-- Artikel / Halaman Terkait -->
+	<?php 
+	$relatedQuery = $post_type == 'post' ? get_related_posts($query->post_categories, _toInteger(service('uri')->getSegment(2))) : get_another_pages(_toInteger(service('uri')->getSegment(2)), 5); 
+	if ($relatedQuery && $relatedQuery->getNumRows() > 0) { 
+	?>
+		<div class="related-posts-section mb-4">
+			<h5 class="section-title-modern mb-3 font-weight-bold">
+				<i class="fa fa-bookmark text-primary mr-2"></i> <?=$post_type == 'post' ? 'Tulisan Terkait':'Halaman Lainnya'?>
+			</h5>
+			<div class="row">
+				<?php foreach($relatedQuery->getResult() as $row) { ?>
+					<div class="col-md-6 mb-3">
+						<div class="card-related h-100 bg-white rounded-custom border p-3 shadow-sm-custom transition-all">
+							<h6 class="font-weight-bold mb-2 line-clamp-2">
+								<a href="<?=site_url('read/'.$row->id.'/'.$row->post_slug)?>" class="text-dark hover-primary">
+									<?=$row->post_title?>
+								</a>
+							</h6>
+							<p class="text-muted small mb-2 line-clamp-2">
+								<?=substr(strip_tags($row->post_content), 0, 110)?>...
+							</p>
+							<div class="d-flex justify-content-between align-items-center text-muted small mt-auto">
+								<span><i class="fa fa-calendar-o mr-1"></i> <?=date('d/m/Y', strtotime($row->created_at))?></span>
+								<a href="<?=site_url('read/'.$row->id.'/'.$row->post_slug)?>" class="text-primary font-weight-bold">Baca <i class="fa fa-arrow-right ml-1"></i></a>
 							</div>
 						</div>
 					</div>
 				<?php } ?>
-			<?php } ?>
-
+			</div>
 		</div>
-		<?php echo $this->include('themes/1/sidebar')?>
+	<?php } ?>
+
+</div>
+<?php echo $this->include('themes/1/sidebar')?>

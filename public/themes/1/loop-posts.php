@@ -39,59 +39,96 @@
 				var str = '';
 				for (var z in rows) {
 					var row = rows[ z ];
-					str += '<div class="card rounded-0 border border-secondary mb-3 posts">';
-					str += '<div class="row no-gutters">';
+					str += '<article class="card-archive-item bg-white rounded-custom border shadow-sm-custom overflow-hidden mb-4 posts">';
+					str += '<div class="row no-gutters align-items-center">';
 					str += '<div class="col-md-5">';
-					str += '<img src="' + _BASE_URL + 'media_library/posts/medium/' + row.post_image + '" class="card-img rounded-0">';
+					str += '<div class="card-archive-img-box">';
+					str += '<img src="' + _BASE_URL + 'media_library/posts/medium/' + row.post_image + '" class="card-archive-img" alt="' + row.post_title + '">';
+					str += '</div>';
 					str += '</div>';
 					str += '<div class="col-md-7">';
-					str += '<div class="card-body p-3">';
-					str += '<h5 class="card-title"><a href="' + _BASE_URL + 'read/' + row.id + '/' + row.post_slug + '">' + row.post_title + '</a></h5>';
-					str += '<p class="card-text mb-0">' + strip_tags(row.post_content, '').substr(0, 165) + '</p>';
-					str += '<div class="d-flex justify-content-between align-items-center mt-1">';
-					str += '<small class="text-muted">';
-					str += row.created_at.substr(8, 2) + '/' + row.created_at.substr(5, 2) + '/' + row.created_at.substr(0, 4);
-					str += ' ' + row.created_at.substr(11, 5);
-					str += ' - Oleh ' + row.post_author;
-					str += ' - Dilihat ' + row.post_counter + ' kali';
-					str += '</small>';
-					str += '<a href="' + _BASE_URL + 'read/' + row.id + '/' + row.post_slug + '" class="btn btn-sm btn-success rounded-0"><i class="fa fa-search"></i></a>';
+					str += '<div class="card-body p-4">';
+					str += '<div class="card-meta-inline text-muted small mb-2">';
+					str += '<span class="mr-3"><i class="fa fa-calendar-o mr-1 text-primary"></i> ' + row.created_at.substr(8, 2) + '/' + row.created_at.substr(5, 2) + '/' + row.created_at.substr(0, 4) + '</span>';
+					str += '<span><i class="fa fa-eye mr-1 text-primary"></i> ' + row.post_counter + ' kali</span>';
+					str += '</div>';
+					str += '<h5 class="card-title font-weight-bold mb-2"><a href="' + _BASE_URL + 'read/' + row.id + '/' + row.post_slug + '" class="text-dark hover-primary">' + row.post_title + '</a></h5>';
+					str += '<p class="card-text text-muted small mb-3">' + strip_tags(row.post_content, '').substr(0, 140) + '...</p>';
+					str += '<a href="' + _BASE_URL + 'read/' + row.id + '/' + row.post_slug + '" class="read-more-link font-weight-bold">Baca Selengkapnya <i class="fa fa-long-arrow-right ml-1"></i></a>';
 					str += '</div>';
 					str += '</div>';
 					str += '</div>';
-					str += '</div>';
-					str += '</div>';
+					str += '</article>';
 				}
-				var elementId = $("div.posts:last");
-				$( str ).insertAfter( elementId );
+				var elementId = $("article.posts:last");
+				if (elementId.length) {
+					$( str ).insertAfter( elementId );
+				} else {
+					$("div.posts-container").append(str);
+				}
 				if (page == parseInt(total_page)) $('div.more-posts').remove();
 			});
 		}
 	}
 </script>
-<div class="col-lg-8 col-md-8 col-sm-12 ">
-	<h5 class="page-title mb-3"><?=strtoupper($page_title);?></h5>
-	<?php foreach($query->getResult() as $row) { ?>
-		<div class="card rounded-0 border border-secondary mb-3 posts">
-			<div class="row no-gutters">
-				<div class="col-md-5">
-					<img src="<?=base_url('media_library/posts/medium/'.$row->post_image)?>" class="card-img rounded-0" alt="<?=$row->post_title?>">
-				</div>
-				<div class="col-md-7">
-					<div class="card-body p-3">
-						<h5 class="card-title"><a href="<?=site_url('read/'.$row->id.'/'.$row->post_slug)?>"><?=$row->post_title?></a></h5>
-						<p class="card-text mb-0"><?=substr(strip_tags($row->post_content), 0, 165)?></p>
-						<div class="d-flex justify-content-between align-items-center mt-1">
-							<small class="text-muted"><?=date('d/m/Y H:i', strtotime($row->created_at))?> - Oleh <?=$row->post_author?> - Dilihat <?=$row->post_counter?> kali</small>
-							<a href="<?=site_url('read/'.$row->id.'/'.$row->post_slug)?>" class="btn btn-sm btn-success rounded-0"><i class="fa fa-search"></i></a>
+
+<div class="col-lg-8 col-md-7 col-sm-12">
+	<div class="archive-header mb-4">
+		<span class="section-tagline">Arsip & Kategori</span>
+		<h2 class="archive-title font-weight-bold text-dark"><?=strtoupper($page_title);?></h2>
+		<div class="section-divider"></div>
+	</div>
+
+	<div class="posts-container">
+		<?php if ($query && $query->getNumRows() > 0) { ?>
+			<?php foreach($query->getResult() as $row) { ?>
+				<article class="card-archive-item bg-white rounded-custom border shadow-sm-custom overflow-hidden mb-4 posts">
+					<div class="row no-gutters align-items-center">
+						<div class="col-md-5">
+							<div class="card-archive-img-box position-relative">
+								<img src="<?=base_url('media_library/posts/medium/'.$row->post_image)?>" class="card-archive-img" alt="<?=$row->post_title?>">
+								<div class="card-archive-date-badge">
+									<span class="day"><?=date('d', strtotime($row->created_at))?></span>
+									<span class="month"><?=bulan(date('m', strtotime($row->created_at)))?></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-7">
+							<div class="card-body p-4">
+								<div class="card-meta-inline text-muted small mb-2">
+									<span class="mr-3"><i class="fa fa-user-o mr-1 text-primary"></i> <?=$row->post_author?></span>
+									<span><i class="fa fa-eye mr-1 text-primary"></i> <?=$row->post_counter?> kali</span>
+								</div>
+								<h5 class="card-title font-weight-bold mb-2">
+									<a href="<?=site_url('read/'.$row->id.'/'.$row->post_slug)?>" class="text-dark hover-primary">
+										<?=$row->post_title?>
+									</a>
+								</h5>
+								<p class="card-text text-muted small mb-3">
+									<?=substr(strip_tags($row->post_content), 0, 140)?>...
+								</p>
+								<a href="<?=site_url('read/'.$row->id.'/'.$row->post_slug)?>" class="read-more-link font-weight-bold">
+									Baca Selengkapnya <i class="fa fa-long-arrow-right ml-1"></i>
+								</a>
+							</div>
 						</div>
 					</div>
-				</div>
+				</article>
+			<?php } ?>
+		<?php } else { ?>
+			<div class="empty-state-card bg-white rounded-custom border p-5 text-center shadow-sm-custom">
+				<i class="fa fa-folder-open-o fa-3x text-muted mb-3"></i>
+				<h5 class="font-weight-bold text-dark">Belum Ada Informasi</h5>
+				<p class="text-muted small">Saat ini belum ada artikel atau tulisan yang diterbitkan dalam kategori ini.</p>
+				<a href="<?=base_url()?>" class="btn btn-outline-primary-custom btn-sm">Kembali ke Beranda</a>
 			</div>
-		</div>
-	<?php } ?>
-	<div class="justify-content-between align-items-center float-right mb-3 w-100 more-posts">
-		<button type="button" onclick="get_posts()" class="btn btn-success rounded-0 float-right"><i class="fa fa-refresh"></i> Tampilkan Lebih Banyak</button>
+		<?php } ?>
+	</div>
+
+	<div class="text-center my-4 more-posts">
+		<button type="button" onclick="get_posts()" class="btn btn-primary-gradient px-4">
+			<i class="fa fa-refresh mr-2"></i> Tampilkan Lebih Banyak
+		</button>
 	</div>
 </div>
 <?php echo $this->include('themes/1/sidebar')?>
